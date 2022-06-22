@@ -2,8 +2,8 @@ import axios from "axios";
 
 //axios创建对象
 const Server = axios.create({
-  // baseURL: process.env.VUE_APP_BASE_URL,
-  baseURL: '/api',
+  baseURL: 'http://127.0.0.1:7001',
+  // baseURL: '/api',
   timeout: 8_000
 })
 //定义前置拦截 请求发出去前触发
