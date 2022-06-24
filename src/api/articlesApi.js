@@ -2,11 +2,11 @@ import request from './../utils/request.js'
 
 const ArticlesApi = {}
 
-ArticlesApi.queryAllArticles = (param)=>{
+ArticlesApi.queryAllArticles = (params)=>{
   return request({
-    url: '/',
+    url: '/get_posts',
     method: 'get',
-    param: param,
+    params: params,
   })
 }
 export default ArticlesApi

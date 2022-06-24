@@ -1,8 +1,8 @@
 <template>
-  <Demo msg="This is a demo" />
+  <Home msg="" />
 </template>
 <script setup>
-import Demo from './components/Demo.vue'
+import Home from './views/Home.vue'
 </script>
 <style>
 #app {
