@@ -6,10 +6,12 @@
         <component :is="Component" />
       </keep-alive>
     </router-view>
+    <Copywright />
   </div>
 </template>
 <script setup>
-import Nav from './components/Nav.vue'
+import Nav from '@/components/Nav.vue'
+import Copywright from '@/components/Copywright.vue'
 </script>
 <style>
 #app {
@@ -22,5 +24,9 @@ body {
   margin: 0;
   padding: 0;
   list-style: none;
+  box-sizing: border-box;
+}
+.my-app {
+  position: relative;
 }
 </style>

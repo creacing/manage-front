@@ -81,7 +81,6 @@ const closeDialog = () => {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-image: linear-gradient(to top, #12c0fa 0%, #158df4 100%);
   .my-nav-content {
     width: 70%;
     height: 100%;
