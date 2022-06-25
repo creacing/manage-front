@@ -1,9 +1,11 @@
 <template>
   <div class="my-app">
-    <Nav/>
-    <keep-alive>
-      <router-view></router-view>
-    </keep-alive>
+    <Nav />
+    <router-view v-slot="{ Component }">
+      <keep-alive>
+        <component :is="Component" />
+      </keep-alive>
+    </router-view>
   </div>
 </template>
 <script setup>
@@ -15,7 +17,8 @@ import Nav from './components/Nav.vue'
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
   list-style: none;

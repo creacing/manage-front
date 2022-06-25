@@ -10,13 +10,18 @@
       <img src="/search.svg" alt="" style="width: 2rem; width: 2rem" />
       <div class="search-input-txt">搜索</div>
     </div>
-    <input v-model="inputValue" class="search-input-text" type="text" />
+    <input
+      v-model="inputValue"
+      class="search-input-text"
+      type="text"
+      @input="searchForValue"
+    />
     <ul class="search-list">
-      <li v-for="item in searchRes" :key="item" class="search-list-item">
+      <li v-for="title in searchRes" :key="title" class="search-list-item">
         <div class="search-item">
-          <router-link to="#">
+          <router-link to="/">
             <a
-              @click="goToArticle"
+              @click="goToArticle(title)"
               style="
                 color: rgb(65, 185, 131);
                 height: 3rem;
@@ -24,7 +29,7 @@
                 display: flex;
                 align-items: center;
               "
-              >{{ item.frontMatter.title }}</a
+              >{{ title }}</a
             >
           </router-link>
         </div>
@@ -35,6 +40,8 @@
 </template>
 <script setup>
 import { ref } from "vue";
+import ArticlesApi from '@/api/articlesApi.js'
+import { debounce } from '@/utils/utils.js'
 const props = defineProps({
   showSearchDiolag: Boolean
 })
@@ -42,15 +49,39 @@ const emit = defineEmits(['close'])
 const inputValue = ref("");
 const searchRes = ref([]);
 
-const searchForValue = () => {
-  if (inputValue.value === "") {
-    return;
-  }
+const handleQuery = (title) => {
   searchRes.value = [];
   //do something
+  let param = null
+  if (title) {
+    param = {
+      articleTitle: title
+    }
+  } else {
+    param = {
+      keywords: inputValue.value
+    }
+  }
+
+  ArticlesApi.queryAllArticles(param).then(res => {
+    if (res?.code === '20000') {
+      const { data } = res
+      searchRes.value = data
+    }
+  })
+}
+const debounceFun = debounce(handleQuery, 1000)
+const searchForValue = () => {
+  if (inputValue.value === "") {
+    searchRes.value = []
+    return;
+  }
+
+  debounceFun()
 };
 
-const goToArticle = () => {
+const goToArticle = (title) => {
+  handleQuery(title)
   emit('close', false)
 };
 
@@ -67,6 +98,7 @@ const goToArticle = () => {
 }
 
 .search-dialog {
+  box-sizing: border-box;
   width: 90vw;
   position: fixed;
   top: 15vh;
@@ -80,10 +112,10 @@ const goToArticle = () => {
   background-color: #12121c;
 }
 .higher-search-dialog {
-  height: 800px;
+  height: 70vh;
 }
 .lower-search-dialog {
-  height: 500px;
+  height: 50vh;
 }
 
 .search-input-text {

@@ -9,4 +9,5 @@ ArticlesApi.queryAllArticles = (params)=>{
     params: params,
   })
 }
+
 export default ArticlesApi
