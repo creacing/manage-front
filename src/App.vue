@@ -1,12 +1,12 @@
 <template>
   <div class="my-app">
-    <Nav />
+    <!-- <Nav /> -->
     <router-view v-slot="{ Component }">
       <keep-alive>
         <component :is="Component" />
       </keep-alive>
     </router-view>
-    <Copywright />
+    <!-- <Copywright /> -->
   </div>
 </template>
 <script setup>
