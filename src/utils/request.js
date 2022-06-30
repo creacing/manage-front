@@ -8,6 +8,9 @@ const Server = axios.create({
 })
 //定义前置拦截 请求发出去前触发
 Server.interceptors.request.use(config=>{
+  //检查token
+  // config.headers.token = sessionStorage.gteItem("token");
+  // console.log('config.headers.token',config.headers.token);
   return config
 },error=>{
   return Promise.reject(error)
