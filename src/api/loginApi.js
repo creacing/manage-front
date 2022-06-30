@@ -1,13 +1,13 @@
-import request from '@/utils/request.js'
+import request from "@/utils/request.js";
 
-const LoginApi = {}
+const LoginApi = {};
 
-LoginApi.login = (params)=>{
-  return request({
-    url: '/login',
-    method: 'post',
-    data: params,
-  })
-}
+LoginApi.login = (params) => {
+    return request({
+        url: "/login",
+        method: "post",
+        data: params,
+    });
+};
 
-export default LoginApi
+export default LoginApi;
