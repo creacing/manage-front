@@ -10,4 +10,12 @@ LoginApi.login = (params) => {
     });
 };
 
+LoginApi.register = (params) => {
+  return request({
+      url: "/register",
+      method: "post",
+      data: params,
+  });
+};
+
 export default LoginApi;
