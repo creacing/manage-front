@@ -10,8 +10,8 @@
   </div>
 </template>
 <script setup>
-import Nav from '@/components/Nav.vue'
-import Copywright from '@/components/Copywright.vue'
+import Nav from "@/components/Nav.vue";
+import Copywright from "@/components/Copywright.vue";
 </script>
 <style>
 #app {

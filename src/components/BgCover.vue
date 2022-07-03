@@ -4,7 +4,7 @@
   </div>
 </template>
 <script setup>
-import { ref } from 'vue'
+import { ref } from "vue";
 </script>
 <style lang='scss' scoped>
 .my-bg-cover {
@@ -16,5 +16,6 @@ import { ref } from 'vue'
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  z-index: -1;
 }
 </style>
