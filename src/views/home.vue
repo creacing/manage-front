@@ -69,6 +69,7 @@ onMounted(() => {
   socket.emitter.addListener(
     "data",
     (data) => {
+      console.log('data is:', data);
       infoList.value.push(data);
     },
     { $options: { name: "Home" } }
@@ -76,7 +77,10 @@ onMounted(() => {
   socket.emitter.addListener(
     "res",
     (data) => {
-      console.log("data is", data);
+      console.log('res is:', data);
+      if (data.token === 'expired') {
+        localStorage.removeItem('m-token')
+      }
     },
     { $options: { name: "Home" } }
   );
