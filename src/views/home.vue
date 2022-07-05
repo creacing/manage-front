@@ -31,7 +31,7 @@
 import { onMounted, ref, inject, getCurrentInstance, computed } from "vue";
 import ArticlesApi from "../api/articlesApi.js";
 import VueSocketIO from "vue-3-socket.io";
-import SocketIO from "socket.io-client";
+// import SocketIO from "socket.io-client";
 const message = ref("");
 const infoList = ref([]);
 const size = ref("");

@@ -5,6 +5,7 @@ import Tags from '@/views/Tags.vue'
 import Archives from '@/views/Archives.vue'
 import Collections from '@/views/Collections.vue'
 import Login from '@/views/Login.vue'
+// import Layout from '@/views/Layout.vue'
 const router = createRouter({
   history:createWebHistory(),
   routes:[
@@ -12,15 +13,15 @@ const router = createRouter({
       path:'/login',
       component:Login,
     },
+    // {
+    //   path:'/',
+    //   component:Layout,
+    //   meta: {
+    //     requireAuth: true,  // 添加该字段，表示进入这个路由是需要登录的
+    //   },
+    // },
     {
       path:'/home',
-      component:Home,
-      meta: {
-        requireAuth: true,  // 添加该字段，表示进入这个路由是需要登录的
-      },
-    },
-    {
-      path:'/',
       component:Home,
       meta: {
         requireAuth: true,  // 添加该字段，表示进入这个路由是需要登录的

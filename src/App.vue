@@ -1,17 +1,22 @@
 <template>
   <div class="my-app">
     <!-- <Nav /> -->
-    <router-view v-slot="{ Component }">
-      <keep-alive>
-        <component :is="Component" />
-      </keep-alive>
-    </router-view>
+    <Layout>
+      <template #content>
+        <router-view v-slot="{ Component }">
+          <keep-alive>
+            <component :is="Component" />
+          </keep-alive>
+        </router-view>
+      </template>
+    </Layout>
     <!-- <Copywright /> -->
   </div>
 </template>
 <script setup>
-import Nav from "@/components/Nav.vue";
-import Copywright from "@/components/Copywright.vue";
+// import Nav from "@/components/Nav.vue";
+// import Copywright from "@/components/Copywright.vue";
+import Layout from '@/views/Layout.vue';
 </script>
 <style>
 #app {
@@ -28,5 +33,7 @@ body {
 }
 .my-app {
   position: relative;
+  min-height: 100vh;
+  height: 100vh;
 }
 </style>
