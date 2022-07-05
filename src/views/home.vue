@@ -1,17 +1,8 @@
 <template>
   <div class="message-content">
-    <div class="send-message">
-      <el-input
-        v-model="message"
-        placeholder="Please input message"
-        clearable
-        class="messagge-input"
-      />
-      <el-button @click="sendMessage" type="primary">SEND MESSAGE</el-button>
-    </div>
-    <div class="message-show">
+    <div class="messages">
       <el-descriptions
-        title="messages"
+        title="room name"
         :column="1"
         :size="size"
         direction="vertical"
@@ -21,9 +12,18 @@
           v-for="info in infoList"
           :key="info"
           :label="info.username"
-          >{{ `${info.date}   ${info.text}` }}</el-descriptions-item
-        >
+          >{{ `${info.date}   ${info.text}` }}
+        </el-descriptions-item>
       </el-descriptions>
+    </div>
+    <div class="send-message">
+      <el-input
+        v-model="message"
+        placeholder="Please input message"
+        clearable
+        class="messagge-input"
+      />
+      <el-button @click="sendMessage" type="primary">SEND MESSAGE</el-button>
     </div>
   </div>
 </template>
@@ -63,9 +63,9 @@ onMounted(() => {
   socket.io.on("disconnect", () => {
     console.log("disconnected");
   });
-  socket.io.on("res", () => {
-    console.dir("data is", data);
-  });
+  // socket.io.on("res", () => {
+  //   console.dir("data is", data);
+  // });
   socket.emitter.addListener(
     "data",
     (data) => {
@@ -118,23 +118,23 @@ defineProps({
 </script>
 <style lang="scss" scope>
 .message-content {
-  width: 70%;
+  box-sizing: border-box;
+  padding: 1rem;
+  height: 100%;
+  width: 100%;
   background-color: #fff;
-  position: fixed;
-  height: 80vh;
-  //   background-color: blue;
-  top: 10%;
-  left: 50%;
-  transform: translateX(-50%);
 }
 .send-message {
   display: flex;
   justify-content: space-between;
   .messagge-input {
-    width: 80%;
+    .el-input__wrapper {
+      box-shadow: unset;
+    }
   }
 }
-.message-show {
+.messages {
+  margin-bottom: 1rem;
   height: calc(100% - 60px);
   overflow: auto;
 }
