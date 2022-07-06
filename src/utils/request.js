@@ -28,9 +28,6 @@ Server.interceptors.request.use(
 // let count = 0;
 Server.interceptors.response.use(
     (res) => {
-
-        console.log('xxxxxxxxxx');
-
         // if (res.data.type === "logout") {
         //     if (count === 0) {
         //         localStorage.removeItem("m-token");

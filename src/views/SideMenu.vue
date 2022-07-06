@@ -9,54 +9,73 @@
       >
         <el-sub-menu index="1">
           <template #title>
-            <el-icon><location /></el-icon>
-            <span>Navigator One</span>
+            <el-icon><document /></el-icon>
+            <span>Articles</span>
           </template>
-          <el-menu-item-group title="Group One">
-            <el-menu-item index="1-1">item one</el-menu-item>
-            <el-menu-item index="1-2">item one</el-menu-item>
-          </el-menu-item-group>
-          <el-menu-item-group title="Group Two">
-            <el-menu-item index="1-3">item three</el-menu-item>
-          </el-menu-item-group>
-          <el-sub-menu index="1-4">
-            <template #title>item four</template>
-            <el-menu-item index="1-4-1">item one</el-menu-item>
-          </el-sub-menu>
+          <el-menu-item index="1-1" v-for="title in articlesTitles" :key="title">
+            <el-icon><document /></el-icon> <span>{{title}}</span></el-menu-item
+          >
+          <!-- <el-menu-item index="1-2"
+            ><el-icon><document /></el-icon> <span>Article2</span></el-menu-item
+          >
+          <el-menu-item index="1-3"
+            ><el-icon><document /></el-icon> <span>Article3</span></el-menu-item
+          >
+          <el-menu-item index="1-4"
+            ><el-icon><document /></el-icon> <span>Article4</span></el-menu-item
+          >
+          <el-menu-item index="1-5"
+            ><el-icon><document /></el-icon> <span>Article5</span></el-menu-item
+          > -->
         </el-sub-menu>
-        <el-menu-item index="2">
-          <el-icon><icon-menu /></el-icon>
-          <span>Navigator Two</span>
-        </el-menu-item>
-        <el-menu-item index="3" disabled>
-          <el-icon><document /></el-icon>
-          <span>Navigator Three</span>
-        </el-menu-item>
-        <el-menu-item index="4">
-          <el-icon><setting /></el-icon>
-          <span>Navigator Four</span>
-        </el-menu-item>
+        <el-sub-menu index="2">
+          <template #title>
+            <el-icon><document /></el-icon>
+            <span>Examples</span>
+          </template>
+          <el-menu-item index="2-1">Examples1</el-menu-item>
+          <el-menu-item index="2-2">Examples2</el-menu-item>
+          <el-menu-item index="2-3">Examples3</el-menu-item>
+          <el-menu-item index="2-4">Examples4</el-menu-item>
+          <el-menu-item index="2-5">Examples5</el-menu-item>
+        </el-sub-menu>
+        <el-sub-menu index="3">
+          <template #title>
+            <el-icon><setting /></el-icon>
+            <span>Settings</span>
+          </template>
+          <el-menu-item index="3-1">Settings1</el-menu-item>
+          <el-menu-item index="3-2">Settings2</el-menu-item>
+          <el-menu-item index="3-3">Settings3</el-menu-item>
+          <el-menu-item index="3-4">Settings4</el-menu-item>
+          <el-menu-item index="3-5">Settings5</el-menu-item>
+        </el-sub-menu>
       </el-menu>
     </el-col>
   </el-row>
 </template>
 
 <script lang="ts" setup>
-const sideMenuList = {
-  
-}
+import { articlesStore } from "@/store/articles.js";
+import { ref } from "vue-demi";
+
+const store = articlesStore();
+const articlesTitles = ref(store.articlesTitles)
+console.log("store实例", store.setArticles());
+
+const sideMenuList = {};
 const sideMenuOpen = (key: string, keyPath: string[]) => {
-  console.log(key, keyPath)
-}
-const  sideMenuClose = (key: string, keyPath: string[]) => {
-  console.log(key, keyPath)
-}
+  console.log(key, keyPath);
+};
+const sideMenuClose = (key: string, keyPath: string[]) => {
+  console.log(key, keyPath);
+};
 </script>
 <style lang="scss" scoped>
-.tac{
+.tac {
   height: 100%;
   // width: 200px;
-  .el-menu{
+  .el-menu {
     height: 100%;
   }
 }

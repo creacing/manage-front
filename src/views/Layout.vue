@@ -1,12 +1,12 @@
 <template>
-  <div class="my-topmenu">
+  <div class="my-topmenu" v-show="isLogin">
     <TopMenu />
   </div>
-  <div class="my-body">
-    <div class="my-sidemenu">
+  <div :class="isLogin ? 'my-body' : 'my-body-login'">
+    <div class="my-sidemenu" v-show="isLogin">
       <SideMenu />
     </div>
-    <div class="my-content">
+    <div :class="isLogin ? 'my-content' : 'my-content-isLogin'">
       <slot name="content">
         <div class="my-demo">
           <el-card class="box-card" shadow="hover">
@@ -28,8 +28,41 @@
 <script setup>
 import TopMenu from '@/views/TopMenu.vue'
 import SideMenu from '@/views/SideMenu.vue'
+import { ref, onMounted, watch } from 'vue'
+import { useRouter, onBeforeRouteUpdate } from 'vue-router';
+const router = useRouter()
+const isLogin = ref(true)
+watch(() => router.currentRoute.value.path, (newValue, oldValue) => {
+  if (newValue === '/login') {
+    isLogin.value = false
+  }else{
+     isLogin.value = true
+  }
+}, { immediate: true })
+
+// onMounted(() => {
+//   window.addEventListener('click', () => {
+//     const route = router.currentRoute.value.fullPath;
+//     const token = localStorage.getItem('m-token')
+//     if (!token) {
+//       router.push({ path: "/login" });
+//     }
+//     console.log('eeeeeeeeeeeee',route);
+
+//     if (route === '/login') {
+//       isLogin.value = false
+//     } else {
+//       isLogin.value = true
+//     }
+//   })
+// })
 </script>
 <style lang="scss">
+.my-body-login {
+  height: 100%;
+  width: 100%;
+  display: flex;
+}
 .my-body {
   height: calc(100% - 3.75rem);
   width: 100%;
@@ -37,6 +70,14 @@ import SideMenu from '@/views/SideMenu.vue'
   .my-sidemenu {
     width: 12.5rem;
     height: 100%;
+  }
+  .my-content-login {
+    height: 100%;
+    width: 100%;
+    padding: 1rem;
+    box-sizing: border-box;
+    background-color: #f5f5f5;
+    position: relative;
   }
   .my-content {
     height: 100%;

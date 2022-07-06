@@ -1,8 +1,9 @@
 <template>
   <div class="message-content">
+    <div><span>room name</span></div>
     <div class="messages">
       <el-descriptions
-        title="room name"
+        title=""
         :column="1"
         :size="size"
         direction="vertical"
@@ -28,10 +29,8 @@
   </div>
 </template>
 <script setup>
-import { onMounted, ref, inject, getCurrentInstance, computed } from "vue";
-import ArticlesApi from "../api/articlesApi.js";
+import { onMounted, ref, computed, nextTick } from "vue";
 import VueSocketIO from "vue-3-socket.io";
-// import SocketIO from "socket.io-client";
 const message = ref("");
 const infoList = ref([]);
 const size = ref("");
@@ -45,16 +44,13 @@ const blockMargin = computed(() => {
     marginTop: marginMap[size.value] || marginMap.default,
   };
 });
-// const _this = getCurrentInstance()
-// console.log(_this);
+
 let socket;
 onMounted(() => {
   const socketConfig = {
     connection:
       "http://127.0.0.1:7001" + "?usekey=" + localStorage.getItem("m-token"),
   };
-  //-------------------------------------------------
-  //version 1
   socket = new VueSocketIO(socketConfig);
 
   socket.io.on("connect", () => {
@@ -63,14 +59,18 @@ onMounted(() => {
   socket.io.on("disconnect", () => {
     console.log("disconnected");
   });
-  // socket.io.on("res", () => {
-  //   console.dir("data is", data);
-  // });
   socket.emitter.addListener(
     "data",
     (data) => {
       console.log('data is:', data);
       infoList.value.push(data);
+
+      //scroll to bottom
+      nextTick(() => {
+        const outer = document.getElementsByClassName('messages')[0]
+        const inner = document.getElementsByClassName('el-descriptions')[0]
+        outer.scrollTop = inner.scrollHeight
+      })
     },
     { $options: { name: "Home" } }
   );
@@ -80,19 +80,17 @@ onMounted(() => {
       console.log('res is:', data);
       if (data.token === 'expired') {
         localStorage.removeItem('m-token')
+        router.push({ path: "/login" });
       }
     },
     { $options: { name: "Home" } }
   );
-  //-------------------------------------------------
 });
 const sendMessage = () => {
   if (message.value === "") {
     return;
   }
-  console.dir("send message");
-  //version 1
-  // console.log('socket.io.emit',socket.io.emit);
+
   const date = new Date();
   socket.io.emit("index", {
     date: `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()} 
@@ -101,17 +99,6 @@ ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()} message:`,
   });
 };
 
-const currentPage = ref(0);
-const pageValue = 9;
-const params = {
-  currentPage: currentPage.value,
-  pageValue,
-};
-ArticlesApi.queryAllArticles(params).then((res) => {
-  if (res?.code === "20000") {
-    const { data } = res;
-  }
-});
 defineProps({
   msg: String,
 });
@@ -126,16 +113,21 @@ defineProps({
 }
 .send-message {
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
+  height: 5rem;
   .messagge-input {
+    margin-bottom: 0.5rem;
     .el-input__wrapper {
-      box-shadow: unset;
+      // box-shadow: unset;
+      box-shadow: 0 1px 0 #dcdfe6;
+      border-radius: 0;
     }
   }
 }
 .messages {
   margin-bottom: 1rem;
-  height: calc(100% - 60px);
+  height: calc(100% - 8rem);
   overflow: auto;
 }
 </style>
