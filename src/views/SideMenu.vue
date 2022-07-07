@@ -12,8 +12,13 @@
             <el-icon><document /></el-icon>
             <span>Articles</span>
           </template>
-          <el-menu-item index="1-1" v-for="title in articlesTitles" :key="title">
-            <el-icon><document /></el-icon> <span>{{title}}</span></el-menu-item
+          <el-menu-item
+            :index="`1-${index}`"
+            v-for="(title, index) in articlesTitles"
+            :key="title"
+          >
+            <el-icon><document /></el-icon>
+            <span>{{ title }}</span></el-menu-item
           >
           <!-- <el-menu-item index="1-2"
             ><el-icon><document /></el-icon> <span>Article2</span></el-menu-item
@@ -56,11 +61,19 @@
 </template>
 
 <script lang="ts" setup>
-import { articlesStore } from "@/store/articles.js";
-import { ref } from "vue-demi";
+import { articlesStore } from "./../store/articles.js";
+import { ref, onMounted } from "vue-demi";
 
 const store = articlesStore();
-const articlesTitles = ref(store.articlesTitles)
+const articlesTitles: string[] = ref(["demo"]);
+onMounted(() => {
+  setTimeout(() => {
+    articlesTitles.value = store.articlesTitles;
+    console.log("articlesTitles", articlesTitles.value);
+  });
+});
+
+// articlesTitles.value = articlesStore.articlesTitles
 console.log("store实例", store.setArticles());
 
 const sideMenuList = {};
