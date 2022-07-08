@@ -2,27 +2,30 @@
 
 <head>
   <style>
+    body {
+      background-color: #000;
+    }
+
     .seconds,
     .hours,
     .minutes {
       position: relative;
     }
-
     .base {
-      width: 2.5rem;
-      height: 1.4rem;
+      width: 25rem;
+      height: 14rem;
       overflow: hidden;
     }
 
     .text {
       text-align: center;
-      font-size: 1.4rem;
+      font-size: 14rem;
       font-weight: 900;
       color: #fff;
     }
 
     .top {
-      line-height: 2.8rem;
+      line-height: 28rem;
       border-radius: 4px 4px 0 0;
       background-color: #333;
       border-bottom: 1px solid #fff;
@@ -46,7 +49,7 @@
       position: absolute;
       z-index: 1;
       background-color: #333;
-      line-height: 2.8rem;
+      line-height: 28rem;
       border-bottom: 1px solid #fff;
     }
 
@@ -58,15 +61,16 @@
     }
 
     .times {
-      width: 8rem;
+      width: 80rem;
       display: flex;
       flex-direction: column;
       position: fixed;
-      top: 35%;
+      top: 25%;
       left: 50%;
       transform: translateX(-50%);
     }
-    .content{
+
+    .content {
       display: flex;
       justify-content: space-between;
     }
@@ -75,7 +79,7 @@
 
 <body>
   <div class="times">
-    <h5>The passing of time brought a sense of emptiness</h5>
+    <!-- <h5>The passing of time brought a sense of emptiness</h5> -->
     <div class="content">
       <div class="hours" id="hours">
         <div class="top base text" id="htop">0</div>

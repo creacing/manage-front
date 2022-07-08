@@ -10,7 +10,7 @@
         <el-sub-menu index="1">
           <template #title>
             <el-icon><document /></el-icon>
-            <span>Articles</span>
+            <span>文章管理</span>
           </template>
           <el-menu-item
             :index="`1-${index}`"
@@ -33,7 +33,7 @@
             ><el-icon><document /></el-icon> <span>Article5</span></el-menu-item
           > -->
         </el-sub-menu>
-        <el-sub-menu index="2">
+        <!-- <el-sub-menu index="2">
           <template #title>
             <el-icon><document /></el-icon>
             <span>Examples</span>
@@ -43,11 +43,13 @@
           <el-menu-item index="2-3">Examples3</el-menu-item>
           <el-menu-item index="2-4">Examples4</el-menu-item>
           <el-menu-item index="2-5">Examples5</el-menu-item>
-        </el-sub-menu>
+        </el-sub-menu> -->
+        <el-menu-item index="2"><el-icon><Sugar /></el-icon>行情关注</el-menu-item>
+
         <el-sub-menu index="3">
           <template #title>
             <el-icon><setting /></el-icon>
-            <span>Settings</span>
+            <span>我的设置</span>
           </template>
           <el-menu-item index="3-1">Settings1</el-menu-item>
           <el-menu-item index="3-2">Settings2</el-menu-item>
@@ -66,15 +68,13 @@ import { ref, onMounted } from "vue-demi";
 
 const store = articlesStore();
 const articlesTitles: string[] = ref(["demo"]);
+
+// articlesTitles.value = articlesStore.articlesTitles
 onMounted(() => {
   setTimeout(() => {
     articlesTitles.value = store.articlesTitles;
-    console.log("articlesTitles", articlesTitles.value);
   });
 });
-
-// articlesTitles.value = articlesStore.articlesTitles
-console.log("store实例", store.setArticles());
 
 const sideMenuList = {};
 const sideMenuOpen = (key: string, keyPath: string[]) => {
