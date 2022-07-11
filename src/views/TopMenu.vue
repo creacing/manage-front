@@ -9,6 +9,7 @@
       v-for="menu in topMenuList"
       :index="menu.index"
       @click="menu.cb"
+      :key="menu"
       >{{ menu.name }}</el-menu-item
     >
   </el-menu>
@@ -20,17 +21,17 @@ import { useRouter } from "vue-router";
 const router = useRouter();
 const topMenuList = [
   {
-    name: "系统管理",
-    index: '1',
+    name: "系统监控",
+    index: "1",
     cb: () => {
-       router.push({ path: "/serverManage" });
+      router.push({ path: "/serverManage" });
     },
   },
   {
     name: "用户管理",
-    index: '2',
+    index: "2",
     cb: () => {
-       router.push({ path: "/users" });
+      router.push({ path: "/users" });
     },
   },
 ];

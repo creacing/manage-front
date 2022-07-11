@@ -7,56 +7,13 @@
         @open="sideMenuOpen"
         @close="sideMenuClose"
       >
-        <el-sub-menu index="1">
-          <template #title>
-            <el-icon><document /></el-icon>
-            <span>文章管理</span>
-          </template>
-          <el-menu-item
-            :index="`1-${index}`"
-            v-for="(title, index) in articlesTitles"
-            :key="title"
-          >
-            <el-icon><document /></el-icon>
-            <span>{{ title }}</span></el-menu-item
-          >
-          <!-- <el-menu-item index="1-2"
-            ><el-icon><document /></el-icon> <span>Article2</span></el-menu-item
-          >
-          <el-menu-item index="1-3"
-            ><el-icon><document /></el-icon> <span>Article3</span></el-menu-item
-          >
-          <el-menu-item index="1-4"
-            ><el-icon><document /></el-icon> <span>Article4</span></el-menu-item
-          >
-          <el-menu-item index="1-5"
-            ><el-icon><document /></el-icon> <span>Article5</span></el-menu-item
-          > -->
-        </el-sub-menu>
-        <!-- <el-sub-menu index="2">
-          <template #title>
-            <el-icon><document /></el-icon>
-            <span>Examples</span>
-          </template>
-          <el-menu-item index="2-1">Examples1</el-menu-item>
-          <el-menu-item index="2-2">Examples2</el-menu-item>
-          <el-menu-item index="2-3">Examples3</el-menu-item>
-          <el-menu-item index="2-4">Examples4</el-menu-item>
-          <el-menu-item index="2-5">Examples5</el-menu-item>
-        </el-sub-menu> -->
-        <el-menu-item index="2"><el-icon><Sugar /></el-icon>行情关注</el-menu-item>
-
-        <el-sub-menu index="3">
-          <template #title>
-            <el-icon><setting /></el-icon>
-            <span>我的设置</span>
-          </template>
-          <el-menu-item index="3-1">Settings1</el-menu-item>
-          <el-menu-item index="3-2">Settings2</el-menu-item>
-          <el-menu-item index="3-3">Settings3</el-menu-item>
-          <el-menu-item index="3-4">Settings4</el-menu-item>
-          <el-menu-item index="3-5">Settings5</el-menu-item>
-        </el-sub-menu>
+        <el-menu-item
+          v-for="menu in sideMenuList"
+          :key="menu"
+          :index="menu.index"
+          @click="menu.cb"
+          ><el-icon><Sugar /></el-icon>{{ menu.name }}</el-menu-item
+        >
       </el-menu>
     </el-col>
   </el-row>
@@ -64,8 +21,36 @@
 
 <script lang="ts" setup>
 import { articlesStore } from "./../store/articles.js";
-import { ref, onMounted } from "vue-demi";
-
+import { ref, onMounted } from "vue";
+import { useRouter } from "vue-router";
+const router = useRouter();
+const sideMenuList = [
+  {
+    name: "文章管理",
+    index: "1",
+    cb: () => {
+      router.push({ path: "/articles" });
+    },
+  },
+  {
+    name: "行情关注",
+    index: "2",
+    cb: () => {
+      router.push({ path: "/stocks" });
+    },
+  },
+  {
+    name: "我的设置",
+    index: "2",
+    cb: () => {
+      router.push({ path: "/mySettings" });
+    },
+  },
+];
+const activeIndex = ref("1");
+const handleSelect = (key: string, keyPath: string[]) => {
+  // console.log(key, keyPath);
+};
 const store = articlesStore();
 const articlesTitles: string[] = ref(["demo"]);
 
@@ -76,7 +61,6 @@ onMounted(() => {
   });
 });
 
-const sideMenuList = {};
 const sideMenuOpen = (key: string, keyPath: string[]) => {
   console.log(key, keyPath);
 };

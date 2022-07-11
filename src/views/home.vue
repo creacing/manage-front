@@ -62,24 +62,24 @@ onMounted(() => {
   socket.emitter.addListener(
     "data",
     (data) => {
-      console.log('data is:', data);
+      console.log("data is:", data);
       infoList.value.push(data);
 
       //scroll to bottom
       nextTick(() => {
-        const outer = document.getElementsByClassName('messages')[0]
-        const inner = document.getElementsByClassName('el-descriptions')[0]
-        outer.scrollTop = inner.scrollHeight
-      })
+        const outer = document.getElementsByClassName("messages")[0];
+        const inner = document.getElementsByClassName("el-descriptions")[0];
+        outer.scrollTop = inner.scrollHeight;
+      });
     },
     { $options: { name: "Home" } }
   );
   socket.emitter.addListener(
     "res",
     (data) => {
-      console.log('res is:', data);
-      if (data.token === 'expired') {
-        localStorage.removeItem('m-token')
+      console.log("res is:", data);
+      if (data.token === "expired") {
+        localStorage.removeItem("m-token");
         router.push({ path: "/login" });
       }
     },

@@ -1,198 +1,224 @@
 <template>
+  <div class="baseinfos-cards">
+    <div class="baseinfo mr">
+      <div class="card-title">平台</div>
+      <div class="card-des">
+        <h1>{{ plantForm }}</h1>
+      </div>
+    </div>
+    <div class="baseinfo mr">
+      <div class="card-title">运行时间</div>
+      <div class="card-des">
+        <h1>{{ runTime }} s</h1>
+      </div>
+    </div>
+    <div class="baseinfo">
+      <div class="card-title">CPU使用率</div>
+      <div class="card-des">
+        <h1>{{ cpuUsagePercent * 100 }} %</h1>
+      </div>
+    </div>
+  </div>
   <div class="server-cards">
-    <div id="cpuuseage" class="monitor"></div>
+    <div id="cpuuseage" class="monitor mr"></div>
     <div id="memoryuseage" class="monitor"></div>
   </div>
 </template>
 <script setup>
 import { ref, onMounted } from "vue";
 import VueSocketIO from "vue-3-socket.io";
-import initEcharts from "@/utils/echarts.js"
-import * as echarts from 'echarts';
+import initEcharts from "@/utils/echarts.js";
 
+const plantForm = ref("");
+const runTime = ref("0");
+const cpuUsagePercent = ref("0");
 const optionsCpu = {
-  color: ['#80FFA5', '#00DDFF', '#37A2FF', '#FF0087', '#FFBF00'],
+  color: ["#80FFA5", "#00DDFF", "#37A2FF", "#FF0087", "#FFBF00"],
   title: {
-    text: 'cpu使用率'
+    text: "cpu使用率",
   },
   tooltip: {
-    trigger: 'axis',
+    trigger: "axis",
     axisPointer: {
-      type: 'cross',
+      type: "cross",
       label: {
-        backgroundColor: '#6a7985'
-      }
-    }
+        backgroundColor: "#6a7985",
+      },
+    },
   },
   legend: {
-    data: ['cpu使用率']
+    data: ["cpu使用率"],
   },
   toolbox: {
     feature: {
-      saveAsImage: {}
-    }
+      saveAsImage: {},
+    },
   },
   grid: {
-    left: '3%',
-    right: '4%',
-    bottom: '3%',
-    containLabel: true
+    left: "3%",
+    right: "4%",
+    bottom: "3%",
+    containLabel: true,
   },
   xAxis: [
     {
-      type: 'category',
+      type: "category",
       boundaryGap: false,
-      data: []
-    }
+      data: [],
+    },
   ],
   yAxis: [
     {
-      type: 'value'
-    }
+      type: "value",
+    },
   ],
   series: [
     {
-      name: 'cpu使用率',
-      type: 'line',
-      stack: 'Total',
+      name: "cpu使用率",
+      type: "line",
+      stack: "Total",
       smooth: true,
       lineStyle: {
-        width: 0
+        width: 0,
       },
       showSymbol: false,
       areaStyle: {
         opacity: 0.8,
-        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+        color: new initEcharts.echarts.graphic.LinearGradient(0, 0, 0, 1, [
           {
             offset: 0,
-            color: 'rgb(128, 255, 165)'
+            color: "rgb(128, 255, 165)",
           },
           {
             offset: 1,
-            color: 'rgb(1, 191, 236)'
-          }
-        ])
+            color: "rgb(1, 191, 236)",
+          },
+        ]),
       },
       emphasis: {
-        focus: 'series'
+        focus: "series",
       },
-      data: [0]
-    }
-  ]
-}
+      data: [0],
+    },
+  ],
+};
 const optionsMemory = {
-  color: ['#80FFA5', '#00DDFF', '#37A2FF', '#FF0087', '#FFBF00'],
+  color: ["#80FFA5", "#00DDFF", "#37A2FF", "#FF0087", "#FFBF00"],
   title: {
-    text: '内存使用情况'
+    text: "内存使用情况",
   },
   tooltip: {
-    trigger: 'axis',
+    trigger: "axis",
     axisPointer: {
-      type: 'cross',
+      type: "cross",
       label: {
-        backgroundColor: '#6a7985'
-      }
-    }
+        backgroundColor: "#6a7985",
+      },
+    },
   },
   legend: {
-    data: ['内存总量', '剩余内存']
+    data: ["内存总量", "剩余内存"],
   },
   toolbox: {
     feature: {
-      saveAsImage: {}
-    }
+      saveAsImage: {},
+    },
   },
   grid: {
-    left: '3%',
-    right: '4%',
-    bottom: '3%',
-    containLabel: true
+    left: "3%",
+    right: "4%",
+    bottom: "3%",
+    containLabel: true,
   },
   xAxis: [
     {
-      type: 'category',
+      type: "category",
       boundaryGap: false,
-      data: []
-    }
+      data: [],
+    },
   ],
   yAxis: [
     {
-      type: 'value'
-    }
+      type: "value",
+    },
   ],
   series: [
     {
-      name: '内存总量',
-      type: 'line',
-      stack: 'Total',
+      name: "内存总量",
+      type: "line",
+      stack: "Total",
       smooth: true,
       lineStyle: {
-        width: 0
+        width: 0,
       },
       showSymbol: false,
       areaStyle: {
         opacity: 0.8,
-        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+        color: new initEcharts.echarts.graphic.LinearGradient(0, 0, 0, 1, [
           {
             offset: 0,
-            color: 'rgb(128, 255, 165)'
+            color: "rgb(128, 255, 165)",
           },
           {
             offset: 1,
-            color: 'rgb(1, 191, 236)'
-          }
-        ])
+            color: "rgb(1, 191, 236)",
+          },
+        ]),
       },
       emphasis: {
-        focus: 'series'
+        focus: "series",
       },
-      data: [0]
+      data: [0],
     },
     {
-      name: '剩余内存',
-      type: 'line',
-      stack: 'Total',
+      name: "剩余内存",
+      type: "line",
+      stack: "Total",
       smooth: true,
       lineStyle: {
-        width: 0
+        width: 0,
       },
       showSymbol: false,
       areaStyle: {
         opacity: 0.8,
-        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+        color: new initEcharts.echarts.graphic.LinearGradient(0, 0, 0, 1, [
           {
             offset: 0,
-            color: 'rgb(0, 221, 255)'
+            color: "rgb(0, 221, 255)",
           },
           {
             offset: 1,
-            color: 'rgb(77, 119, 255)'
-          }
-        ])
+            color: "rgb(77, 119, 255)",
+          },
+        ]),
       },
       emphasis: {
-        focus: 'series'
+        focus: "series",
       },
-      data: [0]
-    }
-  ]
-}
+      data: [0],
+    },
+  ],
+};
 let socket;
 onMounted(() => {
-  const date = new Date()
-  const formatDate = `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`
+  let myCpuusage = null;
+  let myMemoryuseage = null;
+  const date = new Date();
+  const formatDate = `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
   // const formatDate = `${date.getFullYear()}${(date.getMonth() + 1) < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1}${date.getDate() < 10 ? '0' + date.getDate() : date.getDate()}`
 
-  optionsCpu.xAxis[0].data.push(formatDate)
+  optionsCpu.xAxis[0].data.push(formatDate);
 
-  initEcharts('cpuuseage', optionsCpu)
+  myCpuusage = initEcharts("cpuuseage", optionsCpu);
 
-  optionsMemory.xAxis[0].data.push(formatDate)
+  optionsMemory.xAxis[0].data.push(formatDate);
 
-  initEcharts('memoryuseage', optionsMemory)
+  myMemoryuseage = initEcharts("memoryuseage", optionsMemory);
   const socketConfig = {
     connection:
-      "http://127.0.0.1:7001/server" + "?usekey=" + localStorage.getItem("m-token"),
+      "http://127.0.0.1:7001/server" +
+      "?usekey=" +
+      localStorage.getItem("m-token"),
   };
   socket = new VueSocketIO(socketConfig);
 
@@ -205,40 +231,42 @@ onMounted(() => {
   socket.emitter.addListener(
     "data",
     (data) => {
-      // console.log('data is:', data);
-      optionsCpu.xAxis[0].data.push(data.date)
-      optionsCpu.series[0].data.push(data.cpuUsage)
+      console.log("data is:", data);
+      plantForm.value = data.plantForm;
+      runTime.value = data.sysUptime;
+      cpuUsagePercent.value = data.cpuUsage;
+      optionsCpu.xAxis[0].data.push(data.date);
+      optionsCpu.series[0].data.push(data.cpuUsage);
 
-      initEcharts('cpuuseage', optionsCpu)
+      myCpuusage.setOption(optionsCpu);
 
-      optionsMemory.xAxis[0].data.push(data.date)
-      optionsMemory.series[0].data.push(data.totalMem)
-      optionsMemory.series[1].data.push(data.freeMem)
+      optionsMemory.xAxis[0].data.push(data.date);
+      optionsMemory.series[0].data.push(data.totalMem);
+      optionsMemory.series[1].data.push(data.freeMem);
 
-
-      initEcharts('memoryuseage', optionsMemory)
+      myMemoryuseage.setOption(optionsMemory);
     },
     { $options: { name: "ServerManage" } }
   );
   socket.emitter.addListener(
     "res",
     (data) => {
-      console.log('res is:', data);
+      console.log("res is:", data);
     },
     { $options: { name: "ServerManage" } }
   );
-  socket.io.emit("index", 'start get server info');
+  socket.io.emit("index", "start get server info");
 });
 </script>
 
-<style>
+<style lang="scss" scoped>
 .server-cards {
   display: flex;
   justify-content: space-between;
 }
 .monitor {
   height: 300px;
-  width: 46.5%;
+  width: 50%;
   justify-content: space-between;
   background-color: #e9edf2;
   border-radius: 4px;
@@ -251,5 +279,37 @@ onMounted(() => {
   box-shadow: 0 14px 24px #0003;
   z-index: 999;
   border-radius: 6px;
+}
+.baseinfos-cards {
+  display: flex;
+  justify-content: space-between;
+}
+.baseinfo {
+  height: 100px;
+  width: 33%;
+  justify-content: space-between;
+  background-color: #e9edf2;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  padding: 25px;
+  margin-bottom: 20px;
+  .card-title {
+    height: 30px;
+    color: #000;
+    font-weight: bold;
+  }
+  .card-des {
+    height: 60px;
+    color: #999;
+  }
+}
+.baseinfo:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 14px 24px #0003;
+  z-index: 999;
+  border-radius: 6px;
+}
+.mr {
+  margin-right: 1rem;
 }
 </style>
