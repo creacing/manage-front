@@ -1,6 +1,6 @@
 <template>
   <div class="message-content">
-    <div><span>room name</span></div>
+    <div><span>CHAT ROOM - room name</span></div>
     <div class="messages">
       <el-descriptions
         title=""

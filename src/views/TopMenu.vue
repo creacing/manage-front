@@ -1,18 +1,20 @@
 <template>
-  <el-menu
-    :default-active="activeIndex"
-    class="el-menu-demo"
-    mode="horizontal"
-    @select="handleSelect"
-  >
-    <el-menu-item
-      v-for="menu in topMenuList"
-      :index="menu.index"
-      @click="menu.cb"
-      :key="menu"
-      >{{ menu.name }}</el-menu-item
+  <div class="n-top-bar">
+    <el-menu
+      :default-active="activeIndex"
+      class="el-menu-demo"
+      mode="horizontal"
+      @select="handleSelect"
     >
-  </el-menu>
+      <el-menu-item
+        v-for="menu in topMenuList"
+        :index="menu.index"
+        @click="menu.cb"
+        :key="menu"
+        >{{ menu.name }}</el-menu-item
+      >
+    </el-menu>
+  </div>
 </template>
 
 <script lang="ts" setup>
@@ -40,3 +42,27 @@ const handleSelect = (key: string, keyPath: string[]) => {
   // console.log(key, keyPath);
 };
 </script>
+<style lang="scss" scoped>
+.n-top-bar {
+  display: flex;
+  justify-content: center;
+}
+.el-menu-demo {
+  width: 100%;
+}
+.n-top-bar:hover {
+  transition: all 0.3s ease;
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 14px 24px #0003;
+  z-index: 999;
+  border-radius: 6px;
+}
+// :deep(.el-menu-item:hover) {
+//   transition: all 0.3s ease;
+//   transform: translateY(-4px) scale(1.02);
+//   box-shadow: 0 14px 24px #0003;
+//   z-index: 999;
+//   border-radius: 6px;
+//   border: 1px solid #3f9eff;
+// }
+</style>
