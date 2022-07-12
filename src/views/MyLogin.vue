@@ -121,7 +121,7 @@ const register = () => {
   width: 100%;
   display: flex;
   justify-content: flex-start;
-  :deep .el-tabs__item {
+  :deep(.el-tabs__item) {
     width: 6rem;
     padding: 0;
     text-align: center;
@@ -150,7 +150,7 @@ const register = () => {
     align-items: center;
     flex-direction: column;
   }
-  :deep .el-input__wrapper {
+  :deep(.el-input__wrapper) {
     box-shadow: 0 1px 0 #dcdfe6;
     border-radius: 0;
   }
@@ -180,7 +180,7 @@ const register = () => {
   animation: movein 1s;
   animation-fill-mode: forwards; // 把物体动画地从一个地方移动到另一个地方，并让它停留在那里
 }
-:deep .el-button + .el-button {
+:deep(.el-button + .el-button) {
   margin-left: unset;
 }
 </style>

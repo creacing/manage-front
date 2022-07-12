@@ -25,7 +25,7 @@
   </div>
 </template>
 <script setup>
-import { ref, onMounted } from "vue";
+import { ref, onMounted, onUnmounted } from "vue";
 import VueSocketIO from "vue-3-socket.io";
 import initEcharts from "@/utils/echarts.js";
 
@@ -257,6 +257,10 @@ onMounted(() => {
   );
   socket.io.emit("index", "start get server info");
 });
+onUnmounted(() => {
+  myCpuusage.dispose()
+  myMemoryuseage.dispose()
+})
 </script>
 
 <style lang="scss" scoped>

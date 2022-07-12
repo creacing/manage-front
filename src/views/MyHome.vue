@@ -72,7 +72,7 @@ onMounted(() => {
         outer.scrollTop = inner.scrollHeight;
       });
     },
-    { $options: { name: "Home" } }
+    { $options: { name: "MyHome" } }
   );
   socket.emitter.addListener(
     "res",
@@ -83,7 +83,7 @@ onMounted(() => {
         router.push({ path: "/login" });
       }
     },
-    { $options: { name: "Home" } }
+    { $options: { name: "MyHome" } }
   );
 });
 const sendMessage = () => {
