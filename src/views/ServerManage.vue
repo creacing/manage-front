@@ -23,6 +23,9 @@
     <div id="cpuuseage" class="monitor mr"></div>
     <div id="memoryuseage" class="monitor"></div>
   </div>
+  <div class="disk-use-cards">
+    <div id="diskusage" class="disk-monitor"></div>
+  </div>
 </template>
 <script setup>
 import { ref, onMounted, onUnmounted } from "vue";
@@ -258,15 +261,16 @@ onMounted(() => {
   socket.io.emit("index", "start get server info");
 });
 onUnmounted(() => {
-  myCpuusage.dispose()
-  myMemoryuseage.dispose()
-})
+  myCpuusage.dispose();
+  myMemoryuseage.dispose();
+});
 </script>
 
 <style lang="scss" scoped>
 .server-cards {
   display: flex;
   justify-content: space-between;
+  margin-bottom: 20px;
 }
 .monitor {
   height: 300px;
@@ -315,5 +319,9 @@ onUnmounted(() => {
 }
 .mr {
   margin-right: 1rem;
+}
+.disk-monitor {
+  width: 100%;
+  height: calc(100% - 300px - 100px - 20px - 20px);
 }
 </style>

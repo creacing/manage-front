@@ -17,7 +17,8 @@
             <Notebook v-if="menu.index === '1'" />
             <Sugar v-if="menu.index === '2'" />
             <Setting v-if="menu.index === '3'" />
-            <ChatSquare v-if="menu.index === '4'" /> </el-icon
+            <ChatSquare v-if="menu.index === '4'" />
+            <VideoPlay v-if="menu.index === '5'" /> </el-icon
           >{{ menu.name }}</el-menu-item
         >
       </el-menu>
@@ -64,6 +65,20 @@ const sideMenuList = [
     index: "4",
     cb: () => {
       router.push({ path: "/mail" });
+    },
+  },
+  {
+    name: "音乐测试",
+    index: "5",
+    cb: () => {
+      router.push({ path: "/music" });
+    },
+  },
+  {
+    name: "关注商品",
+    index: "6",
+    cb: () => {
+      router.push({ path: "/product" });
     },
   },
 ];

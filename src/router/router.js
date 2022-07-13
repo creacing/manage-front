@@ -9,7 +9,7 @@ import Users from '@/views/Users.vue'
 import ServerManage from '@/views/ServerManage.vue'
 import Stock from '@/views/Stock.vue'
 import Mail from '@/views/Mails.vue'
-
+import Articles from '@/views/Article.vue'
 // import Layout from '@/views/Layout.vue'
 const router = createRouter({
     history: createWebHistory(),
@@ -83,6 +83,14 @@ const router = createRouter({
         {
             path: '/mail',
             component: Mail,
+            meta: {
+                requireAuth: true, // 添加该字段，表示进入这个路由是需要登录的
+            },
+        },
+        //articles
+        {
+            path: '/articles',
+            component: Articles,
             meta: {
                 requireAuth: true, // 添加该字段，表示进入这个路由是需要登录的
             },

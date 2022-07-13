@@ -50,13 +50,13 @@ const handleSelect = (key: string, keyPath: string[]) => {
 .el-menu-demo {
   width: 100%;
 }
-.n-top-bar:hover {
-  transition: all 0.3s ease;
-  transform: translateY(-4px) scale(1.02);
-  box-shadow: 0 14px 24px #0003;
-  z-index: 999;
-  border-radius: 6px;
-}
+// .n-top-bar:hover {
+//   transition: all 0.3s ease;
+//   transform: translateY(-4px) scale(0.98);
+//   box-shadow: 0 14px 24px #0003;
+//   z-index: 999;
+//   border-radius: 6px;
+// }
 // :deep(.el-menu-item:hover) {
 //   transition: all 0.3s ease;
 //   transform: translateY(-4px) scale(1.02);
