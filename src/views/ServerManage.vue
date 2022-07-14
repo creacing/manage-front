@@ -24,14 +24,14 @@
     <div id="memoryuseage" class="monitor"></div>
   </div>
   <div class="disk-use-cards">
-    <div id="diskusage" class="disk-monitor"></div>
+    <div id="diskusage" class="disk-monitor mr"></div>
   </div>
 </template>
 <script setup>
 import { ref, onMounted, onUnmounted } from "vue";
 import VueSocketIO from "vue-3-socket.io";
 import initEcharts from "@/utils/echarts.js";
-
+import diskOption from '@/assets/diskOption.js'
 const plantForm = ref("");
 const runTime = ref("0");
 const cpuUsagePercent = ref("0");
@@ -202,10 +202,11 @@ const optionsMemory = {
     },
   ],
 };
-let socket;
+let socket = null;
+let myCpuusage = null;
+let myMemoryuseage = null;
+let myDiskuseage = null
 onMounted(() => {
-  let myCpuusage = null;
-  let myMemoryuseage = null;
   const date = new Date();
   const formatDate = `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
   // const formatDate = `${date.getFullYear()}${(date.getMonth() + 1) < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1}${date.getDate() < 10 ? '0' + date.getDate() : date.getDate()}`
@@ -270,7 +271,7 @@ onUnmounted(() => {
 .server-cards {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 .monitor {
   height: 300px;
@@ -280,7 +281,7 @@ onUnmounted(() => {
   border-radius: 4px;
   transition: all 0.3s ease;
   padding: 25px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 .monitor:hover {
   transform: translateY(-4px) scale(1.02);
@@ -321,7 +322,23 @@ onUnmounted(() => {
   margin-right: 1rem;
 }
 .disk-monitor {
+  width: 50%;
+  height: 100%;
+  background-color: #e9edf2;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  padding: 25px;
+  box-sizing: border-box;
+}
+.disk-use-cards {
   width: 100%;
-  height: calc(100% - 300px - 100px - 20px - 20px);
+  height: calc(100% - 300px - 100px - 200px);
+  box-sizing: border-box;
+}
+.disk-monitor:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 14px 24px #0003;
+  z-index: 999;
+  border-radius: 6px;
 }
 </style>
