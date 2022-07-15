@@ -31,7 +31,7 @@
 import { ref, onMounted, onUnmounted } from "vue";
 import VueSocketIO from "vue-3-socket.io";
 import initEcharts from "@/utils/echarts.js";
-import diskOption from '@/assets/diskOption.js'
+// import diskOption from '@/assets/diskOption.js'
 const plantForm = ref("");
 const runTime = ref("0");
 const cpuUsagePercent = ref("0");
