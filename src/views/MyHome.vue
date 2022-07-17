@@ -1,6 +1,14 @@
 <template>
   <div class="message-content">
-    <div><span>CHAT ROOM - room name</span></div>
+    <div class="create-search-btns">
+      <ChatRoomNameDialog />
+
+      <!-- <el-button class="create-btns" @click="createNewRoom" type="primary"
+        >创建一个房间</el-button
+      > -->
+      <!-- <div class="search-btns"></div> -->
+    </div>
+    <div><span>聊天室 - room name</span></div>
     <div class="messages">
       <el-descriptions
         title=""
@@ -24,13 +32,16 @@
         clearable
         class="messagge-input"
       />
-      <el-button @click="sendMessage" type="primary">SEND MESSAGE</el-button>
+      <el-button @click="sendMessage" type="primary">发送信息</el-button>
     </div>
   </div>
 </template>
 <script setup>
 import { onMounted, ref, computed, nextTick } from "vue";
 import VueSocketIO from "vue-3-socket.io";
+import ChatApi from "@/api/chatApi.js";
+import { ElMessage } from "element-plus";
+import ChatRoomNameDialog from "@/components/ChatRoomNameDialog.vue";
 const message = ref("");
 const infoList = ref([]);
 const size = ref("");
@@ -45,7 +56,8 @@ const blockMargin = computed(() => {
   };
 });
 
-let socket;
+let socket = null;
+let roomName = "";
 onMounted(() => {
   const socketConfig = {
     connection:
@@ -64,7 +76,6 @@ onMounted(() => {
     (data) => {
       console.log("data is:", data);
       infoList.value.push(data);
-
       //scroll to bottom
       nextTick(() => {
         const outer = document.getElementsByClassName("messages")[0];
@@ -87,9 +98,7 @@ onMounted(() => {
   );
 });
 const sendMessage = () => {
-  if (message.value === "") {
-    return;
-  }
+  if (message.value === "") return;
 
   const date = new Date();
   socket.io.emit("index", {
@@ -97,6 +106,17 @@ const sendMessage = () => {
 ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()} message:`,
     text: message.value,
   });
+};
+
+const createNewRoom = () => {};
+
+const confirmNewRoom = async () => {
+  const roomInfo = {};
+  const { code } = await ChatApi.createRoom(roomInfo);
+  if (code === 20000) {
+    ElMessage.success("创建成功！");
+    console.log("创建聊天室成功！");
+  }
 };
 
 defineProps({

@@ -18,7 +18,9 @@
             <Sugar v-if="menu.index === '2'" />
             <Setting v-if="menu.index === '3'" />
             <ChatSquare v-if="menu.index === '4'" />
-            <VideoPlay v-if="menu.index === '5'" /> </el-icon
+            <VideoPlay v-if="menu.index === '5'" />
+            <ShoppingBag v-if="menu.index === '6'" />
+            <Magnet v-if="menu.index === '7'" /> </el-icon
           >{{ menu.name }}</el-menu-item
         >
       </el-menu>
@@ -79,6 +81,13 @@ const sideMenuList = [
     index: "6",
     cb: () => {
       router.push({ path: "/product" });
+    },
+  },
+  {
+    name: "WIFI信息",
+    index: "7",
+    cb: () => {
+      router.push({ path: "/wifiManage" });
     },
   },
 ];

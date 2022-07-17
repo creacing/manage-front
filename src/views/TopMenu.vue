@@ -23,6 +23,13 @@ import { useRouter } from "vue-router";
 const router = useRouter();
 const topMenuList = [
   {
+    name: "MY ADMIN",
+    index: "0",
+    cb: () => {
+      //   router.push({ path: "/" });
+    },
+  },
+  {
     name: "系统监控",
     index: "1",
     cb: () => {

@@ -24,200 +24,37 @@
     <div id="memoryuseage" class="monitor"></div>
   </div>
   <div class="disk-use-cards">
-    <div id="diskusage" class="disk-monitor mr"></div>
+    <div id="diskuseage" class="monitor mr"></div>
+    <div id="wifiuseage" class="monitor"></div>
   </div>
 </template>
 <script setup>
 import { ref, onMounted, onUnmounted } from "vue";
 import VueSocketIO from "vue-3-socket.io";
 import initEcharts from "@/utils/echarts.js";
-// import diskOption from '@/assets/diskOption.js'
+import initDiskOption from "@/chartsOptions/diskOption.js";
+import initCpuOption from "@/chartsOptions/cpuOption";
+import initMemoryOption from "@/chartsOptions/memoryOption";
+const cpuOption = initCpuOption({ initEcharts });
+const memoryOption = initMemoryOption({ initEcharts });
+const diskOption = initDiskOption({ initEcharts });
 const plantForm = ref("");
 const runTime = ref("0");
 const cpuUsagePercent = ref("0");
-const optionsCpu = {
-  color: ["#80FFA5", "#00DDFF", "#37A2FF", "#FF0087", "#FFBF00"],
-  title: {
-    text: "cpu使用率",
-  },
-  tooltip: {
-    trigger: "axis",
-    axisPointer: {
-      type: "cross",
-      label: {
-        backgroundColor: "#6a7985",
-      },
-    },
-  },
-  legend: {
-    data: ["cpu使用率"],
-  },
-  toolbox: {
-    feature: {
-      saveAsImage: {},
-    },
-  },
-  grid: {
-    left: "3%",
-    right: "4%",
-    bottom: "3%",
-    containLabel: true,
-  },
-  xAxis: [
-    {
-      type: "category",
-      boundaryGap: false,
-      data: [],
-    },
-  ],
-  yAxis: [
-    {
-      type: "value",
-    },
-  ],
-  series: [
-    {
-      name: "cpu使用率",
-      type: "line",
-      stack: "Total",
-      smooth: true,
-      lineStyle: {
-        width: 0,
-      },
-      showSymbol: false,
-      areaStyle: {
-        opacity: 0.8,
-        color: new initEcharts.echarts.graphic.LinearGradient(0, 0, 0, 1, [
-          {
-            offset: 0,
-            color: "rgb(128, 255, 165)",
-          },
-          {
-            offset: 1,
-            color: "rgb(1, 191, 236)",
-          },
-        ]),
-      },
-      emphasis: {
-        focus: "series",
-      },
-      data: [0],
-    },
-  ],
-};
-const optionsMemory = {
-  color: ["#80FFA5", "#00DDFF", "#37A2FF", "#FF0087", "#FFBF00"],
-  title: {
-    text: "内存使用情况",
-  },
-  tooltip: {
-    trigger: "axis",
-    axisPointer: {
-      type: "cross",
-      label: {
-        backgroundColor: "#6a7985",
-      },
-    },
-  },
-  legend: {
-    data: ["内存总量", "剩余内存"],
-  },
-  toolbox: {
-    feature: {
-      saveAsImage: {},
-    },
-  },
-  grid: {
-    left: "3%",
-    right: "4%",
-    bottom: "3%",
-    containLabel: true,
-  },
-  xAxis: [
-    {
-      type: "category",
-      boundaryGap: false,
-      data: [],
-    },
-  ],
-  yAxis: [
-    {
-      type: "value",
-    },
-  ],
-  series: [
-    {
-      name: "内存总量",
-      type: "line",
-      stack: "Total",
-      smooth: true,
-      lineStyle: {
-        width: 0,
-      },
-      showSymbol: false,
-      areaStyle: {
-        opacity: 0.8,
-        color: new initEcharts.echarts.graphic.LinearGradient(0, 0, 0, 1, [
-          {
-            offset: 0,
-            color: "rgb(128, 255, 165)",
-          },
-          {
-            offset: 1,
-            color: "rgb(1, 191, 236)",
-          },
-        ]),
-      },
-      emphasis: {
-        focus: "series",
-      },
-      data: [0],
-    },
-    {
-      name: "剩余内存",
-      type: "line",
-      stack: "Total",
-      smooth: true,
-      lineStyle: {
-        width: 0,
-      },
-      showSymbol: false,
-      areaStyle: {
-        opacity: 0.8,
-        color: new initEcharts.echarts.graphic.LinearGradient(0, 0, 0, 1, [
-          {
-            offset: 0,
-            color: "rgb(0, 221, 255)",
-          },
-          {
-            offset: 1,
-            color: "rgb(77, 119, 255)",
-          },
-        ]),
-      },
-      emphasis: {
-        focus: "series",
-      },
-      data: [0],
-    },
-  ],
-};
 let socket = null;
 let myCpuusage = null;
 let myMemoryuseage = null;
-let myDiskuseage = null
+let myDiskuseage = null;
 onMounted(() => {
   const date = new Date();
   const formatDate = `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
   // const formatDate = `${date.getFullYear()}${(date.getMonth() + 1) < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1}${date.getDate() < 10 ? '0' + date.getDate() : date.getDate()}`
+  cpuOption.xAxis[0].data.push(formatDate);
+  myCpuusage = initEcharts("cpuuseage", cpuOption);
+  memoryOption.xAxis[0].data.push(formatDate);
+  myMemoryuseage = initEcharts("memoryuseage", memoryOption);
 
-  optionsCpu.xAxis[0].data.push(formatDate);
-
-  myCpuusage = initEcharts("cpuuseage", optionsCpu);
-
-  optionsMemory.xAxis[0].data.push(formatDate);
-
-  myMemoryuseage = initEcharts("memoryuseage", optionsMemory);
+  myDiskuseage = initEcharts("diskuseage", diskOption);
   const socketConfig = {
     connection:
       "http://127.0.0.1:7001/server" +
@@ -225,7 +62,6 @@ onMounted(() => {
       localStorage.getItem("m-token"),
   };
   socket = new VueSocketIO(socketConfig);
-
   socket.io.on("connect", () => {
     console.log("connected /sever");
   });
@@ -239,16 +75,45 @@ onMounted(() => {
       plantForm.value = data.plantForm;
       runTime.value = data.sysUptime;
       cpuUsagePercent.value = data.cpuUsage;
-      optionsCpu.xAxis[0].data.push(data.date);
-      optionsCpu.series[0].data.push(data.cpuUsage);
+      cpuOption.xAxis[0].data.push(data.date);
+      cpuOption.series[0].data.push(data.cpuUsage);
 
-      myCpuusage.setOption(optionsCpu);
+      myCpuusage.setOption(cpuOption);
 
-      optionsMemory.xAxis[0].data.push(data.date);
-      optionsMemory.series[0].data.push(data.totalMem);
-      optionsMemory.series[1].data.push(data.freeMem);
+      memoryOption.xAxis[0].data.push(data.date);
+      memoryOption.series[0].data.push(data.totalMem);
+      memoryOption.series[1].data.push(data.freeMem);
 
-      myMemoryuseage.setOption(optionsMemory);
+      myMemoryuseage.setOption(memoryOption);
+
+      const diskInfo = data.diskinfo;
+
+      const diskData = [];
+      for (const index in diskInfo) {
+        const disk = diskInfo[index];
+        diskData.push({
+          value: Number(disk.total.replace(/[A-Z]/g, "")),
+          value: Number(disk.total.replace(/[A-Z]/g, "")),
+          name: `${disk.mounted}盘总共`,
+          path: `${disk.mounted}/All`,
+          children: [
+            {
+              value: Number(disk.used.replace(/[A-Z]/g, "")),
+              name: `${disk.mounted}盘已使用`,
+              path: `${disk.mounted}/Used`,
+            },
+            {
+              value: Number(disk.available.replace(/[A-Z]/g, "")),
+              name: `${disk.mounted}盘剩余`,
+              path: `${disk.mounted}/Available`,
+            },
+          ],
+        });
+      }
+
+      diskOption.series[0].data = diskData;
+
+      myDiskuseage.setOption(diskOption);
     },
     { $options: { name: "ServerManage" } }
   );
@@ -264,6 +129,7 @@ onMounted(() => {
 onUnmounted(() => {
   myCpuusage.dispose();
   myMemoryuseage.dispose();
+  myDiskuseage.dispose();
 });
 </script>
 
@@ -334,6 +200,8 @@ onUnmounted(() => {
   width: 100%;
   height: calc(100% - 300px - 100px - 200px);
   box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
 }
 .disk-monitor:hover {
   transform: translateY(-4px) scale(1.02);
