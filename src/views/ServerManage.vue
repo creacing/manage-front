@@ -25,7 +25,7 @@
   </div>
   <div class="disk-use-cards">
     <div id="diskuseage" class="monitor mr"></div>
-    <div id="wifiuseage" class="monitor"></div>
+    <div id="netuseage" class="monitor"></div>
   </div>
 </template>
 <script setup>
@@ -35,9 +35,11 @@ import initEcharts from "@/utils/echarts.js";
 import initDiskOption from "@/chartsOptions/diskOption.js";
 import initCpuOption from "@/chartsOptions/cpuOption";
 import initMemoryOption from "@/chartsOptions/memoryOption";
+import initNetOption from "@/chartsOptions/netOption";
 const cpuOption = initCpuOption({ initEcharts });
 const memoryOption = initMemoryOption({ initEcharts });
 const diskOption = initDiskOption({ initEcharts });
+const netOption = initNetOption({ initEcharts });
 const plantForm = ref("");
 const runTime = ref("0");
 const cpuUsagePercent = ref("0");
@@ -45,6 +47,7 @@ let socket = null;
 let myCpuusage = null;
 let myMemoryuseage = null;
 let myDiskuseage = null;
+let myNetuseage = null;
 onMounted(() => {
   const date = new Date();
   const formatDate = `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
@@ -53,6 +56,9 @@ onMounted(() => {
   myCpuusage = initEcharts("cpuuseage", cpuOption);
   memoryOption.xAxis[0].data.push(formatDate);
   myMemoryuseage = initEcharts("memoryuseage", memoryOption);
+
+  netOption.xAxis[0].data.push(formatDate);
+  myNetuseage = initEcharts("netuseage", netOption);
 
   myDiskuseage = initEcharts("diskuseage", diskOption);
   const socketConfig = {
@@ -85,6 +91,12 @@ onMounted(() => {
       memoryOption.series[1].data.push(data.freeMem);
 
       myMemoryuseage.setOption(memoryOption);
+
+      netOption.xAxis[0].data.push(data.date);
+      netOption.series[0].data.push(data.netInfo.download);
+      netOption.series[1].data.push(data.netInfo.upload);
+
+      myNetuseage.setOption(netOption);
 
       const diskInfo = data.diskinfo;
 
@@ -130,6 +142,7 @@ onUnmounted(() => {
   myCpuusage.dispose();
   myMemoryuseage.dispose();
   myDiskuseage.dispose();
+  myNetuseage.dispose();
 });
 </script>
 

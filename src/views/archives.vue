@@ -4,17 +4,18 @@
   <el-tree
     ref="treeRef"
     class="filter-tree"
-    :data="data"
+    :data="dataTree"
     :props="defaultProps"
     default-expand-all
     :filter-node-method="filterNode"
+    @node-click="nodeClick"
   />
 </template>
 
 <script lang="ts" setup>
-import { ref, watch } from "vue";
+import { ref, watch, onBeforeMount } from "vue";
 import { ElTree } from "element-plus";
-
+import ArticlesApi from "@/api/articlesApi.js";
 interface Tree {
   id: number;
   label: string;
@@ -38,56 +39,70 @@ const filterNode = (value: string, data: Tree) => {
   return data.label.includes(value);
 };
 
-const data: Tree[] = [
-  {
-    id: 1,
-    label: "Level one 1",
-    children: [
-      {
-        id: 4,
-        label: "Level two 1-1",
-        children: [
-          {
-            id: 9,
-            label: "Level three 1-1-1",
-          },
-          {
-            id: 10,
-            label: "Level three 1-1-2",
-          },
-        ],
-      },
-    ],
-  },
-  {
-    id: 2,
-    label: "Level one 2",
-    children: [
-      {
-        id: 5,
-        label: "Level two 2-1",
-      },
-      {
-        id: 6,
-        label: "Level two 2-2",
-      },
-    ],
-  },
-  {
-    id: 3,
-    label: "Level one 3",
-    children: [
-      {
-        id: 7,
-        label: "Level two 3-1",
-      },
-      {
-        id: 8,
-        label: "Level two 3-2",
-      },
-    ],
-  },
-];
+const dataTree: Tree[] = ref([
+  // {
+  //   id: 1,
+  //   label: "Level one 1",
+  //   children: [
+  //     {
+  //       id: 4,
+  //       label: "Level two 1-1",
+  //       children: [
+  //         {
+  //           id: 9,
+  //           label: "Level three 1-1-1",
+  //         },
+  //         {
+  //           id: 10,
+  //           label: "Level three 1-1-2",
+  //         },
+  //       ],
+  //     },
+  //   ],
+  // },
+]);
+
+onBeforeMount(() => {
+  ArticlesApi.queryAllArticles().then((res) => {
+    console.log("articles", res);
+    if (res.code === "20000") {
+      const categories = res.data;
+      let count = 0;
+      const out = [];
+      for (const category in categories) {
+        const temp = {
+          id: count,
+          label: category,
+          children: [],
+        };
+        count++;
+
+        const titles = categories[category];
+        for (const title of titles) {
+          temp.children.push({
+            id: count,
+            label: title,
+          });
+          count++;
+        }
+        out.push(temp);
+      }
+      dataTree.value = out;
+    }
+    console.log("dataTree.value", dataTree.value);
+  });
+});
+const nodeClick = (node, attributes, event) => {
+  const title = node.label;
+
+  console.log("node, attributes, event", title);
+
+  ArticlesApi.queryAllArticles({ articleTitle: title }).then((res) => {
+    const out = res.data[0];
+
+    console.log("one article", out);
+  });
+};
 </script>
 <style lang="'scss'" scoped>
 </style>
