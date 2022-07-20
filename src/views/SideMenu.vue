@@ -20,8 +20,10 @@
             <ChatSquare v-if="menu.index === '4'" />
             <VideoPlay v-if="menu.index === '5'" />
             <ShoppingBag v-if="menu.index === '6'" />
-            <Magnet v-if="menu.index === '7'" /> </el-icon
-          >{{ menu.name }}</el-menu-item
+            <Magnet v-if="menu.index === '7'" />
+            <Files v-if="menu.index === '8'" />
+          </el-icon>
+          {{ menu.name }}</el-menu-item
         >
       </el-menu>
     </el-col>
@@ -83,11 +85,18 @@ const sideMenuList = [
       router.push({ path: "/product" });
     },
   },
+  // {
+  //   name: "WIFI信息",
+  //   index: "7",
+  //   cb: () => {
+  //     router.push({ path: "/wifiManage" });
+  //   },
+  // },
   {
-    name: "WIFI信息",
-    index: "7",
+    name: "文档信息",
+    index: "8",
     cb: () => {
-      router.push({ path: "/wifiManage" });
+      router.push({ path: "/document" });
     },
   },
 ];

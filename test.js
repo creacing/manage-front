@@ -1,9 +1,0 @@
-
-
-0: "MESSAGE\ndestination:/topic/sysInit\ncontent-type:application/json\nsubscription:sub-12\nmessage-id:nk53vb51-8998\ncontent-length:306\n\n{\"msgId\":\"bd28d7d660bb415d8284c1c223fffa76\",\"msgDest\":\"topic\",\"msgType\":13,\"receiveUser\":null,\"receiveDept\":null,\"content\":\"2022-07-15 14:51:44 - 172.17.0.15 ERROR TSjsZqy ignite缓存不存在\",\"sysCode\":\"/topic/sysInit\",\"readStatus\":null,\"createTime\":\"2022-07-15 14:51:44\",\"systemType\":null,\"logLevel\":3}\u0000"
-
-
-0: "MESSAGE\ndestination:/topic/totalProgress\ncontent-type:application/json\nsubscription:sub-13\nmessage-id:pbhy4y3z-10969\ncontent-length:446\n\n{\"msgId\":\"a906177cd8f34f1fa801184266155cfb\",\"msgDest\":\"topic\",\"msgType\":11,\"receiveUser\":null,\"receiveDept\":null,\"content\":\"[{\\\"busiName\\\":\\\"clearStart\\\",\\\"currStatus\\\":2,\\\"progressValue\\\":10},{\\\"busiName\\\":\\\"fileProcess\\\",\\\"currStatus\\\":0,\\\"progressValue\\\":0},{\\\"busiName\\\":\\\"sysInit\\\",\\\"currStatus\\\":2,\\\"progressValue\\\":0}]\",\"sysCode\":\"/topic/totalProgress\",\"readStatus\":null,\"createTime\":\"2022-07-15 14:59:41\",\"systemType\":\"0\",\"logLevel\":null}\u0000"
-
-
-0: "MESSAGE\ndestination:/topic/clearingStart\ncontent-type:application/json\nsubscription:sub-1\nmessage-id:b5isgz35-18769\ncontent-length:427\n\n{\"msgId\":\"7daf0e13a8944029aa7979c357d18aca\",\"msgDest\":\"topic\",\"msgType\":11,\"receiveUser\":null,\"receiveDept\":null,\"content\":\"\\\"{\\\\\\\"clearJobBatchId\\\\\\\":\\\\\\\"0\\\\\\\",\\\\\\\"endTime\\\\\\\":\\\\\\\"1899-12-31 00:00:00\\\\\\\",\\\\\\\"priorityInfoId\\\\\\\":\\\\\\\"0\\\\\\\",\\\\\\\"progressStatus\\\\\\\":\\\\\\\"2\\\\\\\",\\\\\\\"progressValue\\\\\\\":\\\\\\\"10\\\\\\\"}\\\"\",\"sysCode\":\"/topic/clearingStart\",\"readStatus\":null,\"createTime\":\"2022-07-15 15:15:47\",\"systemType\":\"0\",\"logLevel\":null}\u0000"

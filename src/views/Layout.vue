@@ -80,6 +80,7 @@ watch(() => router.currentRoute.value.path, (newValue, oldValue) => {
     position: relative;
   }
   .my-content {
+    overflow: auto;
     height: 100%;
     width: calc(100% - 12.5rem);
     padding: 1rem;

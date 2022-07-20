@@ -26,7 +26,7 @@ const topMenuList = [
     name: "MY ADMIN",
     index: "0",
     cb: () => {
-      //   router.push({ path: "/" });
+      router.push({ path: "/" });
     },
   },
   {
@@ -44,7 +44,7 @@ const topMenuList = [
     },
   },
 ];
-const activeIndex = ref("1");
+const activeIndex = ref("0");
 const handleSelect = (key: string, keyPath: string[]) => {
   // console.log(key, keyPath);
 };

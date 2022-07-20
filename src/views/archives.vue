@@ -16,6 +16,7 @@
 import { ref, watch, onBeforeMount } from "vue";
 import { ElTree } from "element-plus";
 import ArticlesApi from "@/api/articlesApi.js";
+
 interface Tree {
   id: number;
   label: string;
@@ -39,28 +40,7 @@ const filterNode = (value: string, data: Tree) => {
   return data.label.includes(value);
 };
 
-const dataTree: Tree[] = ref([
-  // {
-  //   id: 1,
-  //   label: "Level one 1",
-  //   children: [
-  //     {
-  //       id: 4,
-  //       label: "Level two 1-1",
-  //       children: [
-  //         {
-  //           id: 9,
-  //           label: "Level three 1-1-1",
-  //         },
-  //         {
-  //           id: 10,
-  //           label: "Level three 1-1-2",
-  //         },
-  //       ],
-  //     },
-  //   ],
-  // },
-]);
+const dataTree: Tree[] = ref([]);
 
 onBeforeMount(() => {
   ArticlesApi.queryAllArticles().then((res) => {
@@ -92,16 +72,12 @@ onBeforeMount(() => {
     console.log("dataTree.value", dataTree.value);
   });
 });
+const emit = defineEmits(["nodeClick"]);
+
 const nodeClick = (node, attributes, event) => {
   const title = node.label;
 
-  console.log("node, attributes, event", title);
-
-  ArticlesApi.queryAllArticles({ articleTitle: title }).then((res) => {
-    const out = res.data[0];
-
-    console.log("one article", out);
-  });
+  emit("nodeClick", title);
 };
 </script>
 <style lang="'scss'" scoped>
