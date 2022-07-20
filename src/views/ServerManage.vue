@@ -12,10 +12,16 @@
         <h1>{{ runTime }} s</h1>
       </div>
     </div>
-    <div class="baseinfo">
+    <div class="baseinfo mr">
       <div class="card-title">CPU使用率</div>
       <div class="card-des">
         <h1>{{ cpuUsagePercent * 100 }} %</h1>
+      </div>
+    </div>
+    <div class="baseinfo mr">
+      <div class="card-title">Node version</div>
+      <div class="card-des">
+        <h1>{{ cpuUsagePercent }}</h1>
       </div>
     </div>
   </div>
@@ -174,7 +180,7 @@ onUnmounted(() => {
 }
 .baseinfo {
   height: 100px;
-  width: 33%;
+  width: 25%;
   justify-content: space-between;
   background-color: #e9edf2;
   border-radius: 4px;

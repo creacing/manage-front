@@ -10,4 +10,12 @@ ArticlesApi.queryAllArticles = (params)=>{
   })
 }
 
+ArticlesApi.createArticle = (params)=>{
+  return request({
+    url: '/create_post',
+    method: 'get',
+    params: params,
+  })
+}
+
 export default ArticlesApi
