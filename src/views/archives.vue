@@ -1,5 +1,5 @@
 <template>
-  <el-input v-model="filterText" placeholder="Filter keyword" />
+  <el-input v-model="filterText" placeholder="search article" />
 
   <el-tree
     ref="treeRef"

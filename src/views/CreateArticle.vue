@@ -29,10 +29,8 @@
     </div>
     <template #footer>
       <span class="dialog-footer">
-        <el-button @click="dialogVisible = false">Cancel</el-button>
-        <el-button type="primary" @click="dialogVisible = false"
-          >Confirm</el-button
-        >
+        <el-button @click="handleClose">Cancel</el-button>
+        <el-button type="primary" @click="handleClose">Confirm</el-button>
       </span>
     </template>
   </el-dialog>
@@ -43,11 +41,15 @@ import { ref, toRefs } from "vue";
 import { ElMessageBox } from "element-plus";
 const pros = defineProps({ dialogVisible: Boolean });
 const { dialogVisible } = toRefs(pros);
-
+const emit = defineEmits(["closeDialog"]);
 const handleClose = (done: () => void) => {
+  // emit("closeDialog", false);
+
   ElMessageBox.confirm("Are you sure to close this dialog?")
     .then(() => {
-      done();
+      console.log("111111");
+      emit("closeDialog", false);
+      // done();
     })
     .catch(() => {
       // catch error

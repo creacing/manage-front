@@ -26,19 +26,23 @@
   </div>
 </template>
 <script setup>
-import TopMenu from '@/views/TopMenu.vue'
-import SideMenu from '@/views/SideMenu.vue'
-import { ref, onMounted, watch } from 'vue'
-import { useRouter, onBeforeRouteUpdate } from 'vue-router';
-const router = useRouter()
-const isLogin = ref(true)
-watch(() => router.currentRoute.value.path, (newValue, oldValue) => {
-  if (newValue === '/login') {
-    isLogin.value = false
-  }else{
-     isLogin.value = true
-  }
-}, { immediate: true })
+import TopMenu from "@/views/TopMenu.vue";
+import SideMenu from "@/views/SideMenu.vue";
+import { ref, onMounted, watch } from "vue";
+import { useRouter, onBeforeRouteUpdate } from "vue-router";
+const router = useRouter();
+const isLogin = ref(true);
+watch(
+  () => router.currentRoute.value.path,
+  (newValue, oldValue) => {
+    if (newValue === "/login") {
+      isLogin.value = false;
+    } else {
+      isLogin.value = true;
+    }
+  },
+  { immediate: true }
+);
 
 // onMounted(() => {
 //   window.addEventListener('click', () => {

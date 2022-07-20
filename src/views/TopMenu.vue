@@ -14,6 +14,9 @@
         >{{ menu.name }}</el-menu-item
       >
     </el-menu>
+    <div class="top-bar-settings">
+      <el-icon><Apple /></el-icon>
+    </div>
   </div>
 </template>
 
@@ -51,11 +54,25 @@ const handleSelect = (key: string, keyPath: string[]) => {
 </script>
 <style lang="scss" scoped>
 .n-top-bar {
+  position: relative;
   display: flex;
   justify-content: center;
 }
+.top-bar-settings {
+  position: absolute;
+  right: 100px;
+  top: 50%;
+  transform: translateY(-50%);
+  .el-icon {
+    color: #fff;
+  }
+}
 .el-menu-demo {
   width: 100%;
+  background-color: rgb(20, 20, 20);
+  .el-menu-item {
+    color: rgb(255, 255, 255);
+  }
 }
 // .n-top-bar:hover {
 //   transition: all 0.3s ease;

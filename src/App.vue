@@ -16,7 +16,7 @@
 <script setup>
 // import Nav from "@/components/Nav.vue";
 // import Copywright from "@/components/Copywright.vue";
-import Layout from '@/views/Layout.vue';
+import Layout from "@/views/Layout.vue";
 </script>
 <style>
 #app {

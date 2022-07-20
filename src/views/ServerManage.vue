@@ -15,13 +15,13 @@
     <div class="baseinfo mr">
       <div class="card-title">CPU使用率</div>
       <div class="card-des">
-        <h1>{{ cpuUsagePercent * 100 }} %</h1>
+        <h1>{{ (cpuUsagePercent * 100).toFixed(2) }} %</h1>
       </div>
     </div>
-    <div class="baseinfo mr">
-      <div class="card-title">Node version</div>
+    <div class="baseinfo">
+      <div class="card-title">Node版本</div>
       <div class="card-des">
-        <h1>{{ cpuUsagePercent }}</h1>
+        <h1>{{ nodeVersion }}</h1>
       </div>
     </div>
   </div>
@@ -47,6 +47,7 @@ const memoryOption = initMemoryOption({ initEcharts });
 const diskOption = initDiskOption({ initEcharts });
 const netOption = initNetOption({ initEcharts });
 const plantForm = ref("");
+const nodeVersion = ref("");
 const runTime = ref("0");
 const cpuUsagePercent = ref("0");
 let socket = null;
@@ -86,6 +87,7 @@ onMounted(() => {
       console.log("data is:", data);
       plantForm.value = data.plantForm;
       runTime.value = data.sysUptime;
+      nodeVersion.value = data.nodeVersion;
       cpuUsagePercent.value = data.cpuUsage;
       cpuOption.xAxis[0].data.push(data.date);
       cpuOption.series[0].data.push(data.cpuUsage);
