@@ -1,32 +1,65 @@
 <template>
   <div class="my-article">
     <div class="left-archives">
-      <el-button class="upload-btn mb" @click="Upload">
-        Upload
-        <el-icon class="el-icon--right">
-          <Upload />
-        </el-icon>
-      </el-button>
+      <el-button class="upload-btn mb" @click="Upload"
+        >批量上传<el-icon class="el-icon--right"><Upload /></el-icon
+      ></el-button>
       <Archives @node-click="nodeClick" />
     </div>
     <div class="right-articles">
-      <div class="ac-title">
-        <h1>{{ myTitle }}</h1>
+      <div class="right-buttongroup">
+        <el-button class="create-btn" @click="createArticle"
+          >创建文章</el-button
+        >
+        <el-button class="create-btn" @click="updateArticle"
+          >更新文章</el-button
+        >
+
+        <el-button class="create-btn" @click="downloadArticle"
+          ><a
+            :href="downloadUrl"
+            :download="downloadFileName"
+            style="text-decoration: none; color: #999"
+            >下载文章</a
+          ></el-button
+        >
       </div>
-      <div class="ac-group mb">
-        <div class="ac-date">{{ myDate }}</div>
-        <div class="ac-tags">
-          <el-icon>
-            <CollectionTag v-if="myTags" />
-          </el-icon>
-          {{ myTags }}
-        </div>
+
+      <div class="ac-title mb">
+        <div class="ac-el"><div class="">标题</div></div>
+        <el-input v-model="myTitle" placeholder="Please input" class="ml" />
       </div>
-      <div class="ac-description">{{ myDescription }}</div>
+      <!-- <div class="ac-group mb"> -->
+      <div class="ac-date mb">
+        <div class="ac-el"><div class="">日期</div></div>
+        <el-input v-model="myDate" placeholder="Please input" class="ml" />
+      </div>
+      <div class="ac-tags mb">
+        <div class="ac-el"><div class="">标签</div></div>
+        <el-input v-model="myTags" placeholder="Please input" class="ml" />
+        <!-- <el-icon><CollectionTag v-if="myTags" /></el-icon>{{ myTags }} -->
+      </div>
+      <!-- </div> -->
+      <div class="ac-description mb">
+        <div class="ac-el"><div class="">描述</div></div>
+        <el-input
+          v-model="myDescription"
+          placeholder="Please input"
+          class="ml"
+        />
+      </div>
       <div class="ac-content">
-        <div v-html="myContent"></div>
+        <div class="ac-el"><div class="">内容</div></div>
+        <el-input
+          v-model="myContent"
+          placeholder="Please input"
+          show-word-limit
+          type="textarea"
+          rows="30"
+          class="ml"
+        />
+        <!-- <div v-html="myContent"></div> -->
       </div>
-      <el-button class="create-btn" @click="createArticle">Create</el-button>
     </div>
   </div>
 
@@ -37,6 +70,8 @@ import { ref } from "vue";
 import ArticlesApi from "@/api/articlesApi.js";
 import Archives from "./Archives.vue";
 import CreateArticle from "./CreateArticle.vue";
+const downloadUrl = ref("http://127.0.0.1:7001/download_posts");
+const downloadFileName = ref("posts.xls");
 //get
 const myTitle = ref("");
 const myDate = ref("");
@@ -59,8 +94,18 @@ const dialogVisible = ref(false);
 const createArticle = () => {
   dialogVisible.value = true;
 };
+//update
+const updateArticle = () => {};
+//download
+const downloadArticle = () => {
+  ArticlesApi.downloadArticle();
+  // .then((res) => {
+  //   // window.location.href = "";
+  // });
+};
+
 //upload
-const Upload = () => { };
+const Upload = () => {};
 //close
 const closeDialog = () => {
   console.log("关闭弹窗");
@@ -78,9 +123,26 @@ const closeDialog = () => {
 .mb {
   margin-bottom: 1rem;
 }
+.ml {
+  margin-right: 1rem;
+}
+.mr {
+  margin-right: 1rem;
+}
+.my {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+.mx {
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+}
+.mxy {
+  margin: 0.5rem;
+}
 .my-article {
   display: flex;
-  justify-content: space-between;
+  // justify-content: space-between;
   height: 100%;
 }
 .left-archives {
@@ -110,7 +172,6 @@ const closeDialog = () => {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-weight: 900;
   }
   .ac-tags {
     display: flex;
@@ -133,20 +194,53 @@ const closeDialog = () => {
   height: 100%;
   width: 70%;
 }
-.left-archives,
+
 .right-articles {
+  display: flex;
+  flex-direction: column;
   box-sizing: border-box;
   height: 100%;
-  min-width: 400px;
-  .create-btn {
-    position: absolute;
-    right: 1rem;
-    top: 1rem;
-  }
+  // align-items: flex-start;
+  // width: 100%;
+  // min-width: 800px;
+}
+.left-archives {
+  min-width: 300px;
+  width: 300px;
+  box-sizing: border-box;
 }
 .ac-group {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.right-buttongroup {
+  // width: 200px;
+  display: flex;
+  // flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  box-sizing: border-box;
+  // height: 100%;
+  padding: 10px;
+  // height: 100px;
+  width: 100%;
+  .create-btn {
+    width: 100px;
+  }
+}
+.fw {
+  font-weight: 900;
+}
+.ac-el {
+  min-width: 150px;
+  background: #fff;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  // margin: 0.5rem;
+  margin-right: 0.5rem;
+  border-radius: 5px;
 }
 </style>

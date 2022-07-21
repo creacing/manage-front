@@ -11,9 +11,10 @@
         :index="menu.index"
         @click="menu.cb"
         :key="menu"
-      >{{ menu.name }}</el-menu-item>
+        >{{ menu.name }}</el-menu-item
+      >
     </el-menu>
-    <div class="topbar-settings">
+    <div class="my-topbarsettings">
       <el-icon>
         <Apple />
       </el-icon>
@@ -59,7 +60,7 @@ const handleSelect = (key: string, keyPath: string[]) => {
   display: flex;
   justify-content: center;
 }
-.my-topbar-settings {
+.my-topbarsettings {
   position: absolute;
   right: 100px;
   top: 50%;

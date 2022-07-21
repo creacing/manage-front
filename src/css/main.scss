@@ -1,8 +1,12 @@
+* {
+    box-sizing: border-box;
+}
+
 //code element style
 pre {
-  position: relative;
-  background: #999;
-  border-radius: 5px;
-  box-shadow: 2px 2px 2px 2px #999;
-  padding: 5px !important;
+    position: relative;
+    background: #fff;
+    border-radius: 5px;
+    box-shadow: 2px 2px 2px 2px #999;
+    padding: 10px !important;
 }
