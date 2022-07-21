@@ -2,16 +2,13 @@
   <div class="n-cards">
     <div class="n-btns">
       <div class="n-input">
-        <el-input
-          v-model="searchInput"
-          class="w-50 m-2"
-          size="large"
-          placeholder="Please Input"
-        />
+        <el-input v-model="searchInput" class="w-50 m-2" size="large" placeholder="Please Input" />
       </div>
-      <el-button type="primary" @click="queryStockHis"
-        ><el-icon><Refresh /></el-icon
-      ></el-button>
+      <el-button type="primary" @click="queryStockHis">
+        <el-icon>
+          <Refresh />
+        </el-icon>
+      </el-button>
     </div>
     <div id="stockHis" class="n-monitor"></div>
   </div>
@@ -20,7 +17,7 @@
 import { ref, onUnmounted } from "vue";
 import StockApi from "@/api/stockApi.js";
 import initEcharts from "@/utils/echarts.js";
-import stockOption from "@/chartsOptions/stockOption.js";
+import stockOption from "@/chartOption/stockOption.js";
 
 const searchInput = ref("SH600000");
 let STOCK = null;

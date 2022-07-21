@@ -1,9 +1,12 @@
 <template>
   <div class="my-article">
     <div class="left-archives">
-      <el-button class="upload-btn mb" @click="Upload"
-        >Upload<el-icon class="el-icon--right"><Upload /></el-icon
-      ></el-button>
+      <el-button class="upload-btn mb" @click="Upload">
+        Upload
+        <el-icon class="el-icon--right">
+          <Upload />
+        </el-icon>
+      </el-button>
       <Archives @node-click="nodeClick" />
     </div>
     <div class="right-articles">
@@ -13,11 +16,16 @@
       <div class="ac-group mb">
         <div class="ac-date">{{ myDate }}</div>
         <div class="ac-tags">
-          <el-icon><CollectionTag v-if="myTags" /></el-icon>{{ myTags }}
+          <el-icon>
+            <CollectionTag v-if="myTags" />
+          </el-icon>
+          {{ myTags }}
         </div>
       </div>
       <div class="ac-description">{{ myDescription }}</div>
-      <div class="ac-content"><div v-html="myContent"></div></div>
+      <div class="ac-content">
+        <div v-html="myContent"></div>
+      </div>
       <el-button class="create-btn" @click="createArticle">Create</el-button>
     </div>
   </div>
@@ -52,7 +60,7 @@ const createArticle = () => {
   dialogVisible.value = true;
 };
 //upload
-const Upload = () => {};
+const Upload = () => { };
 //close
 const closeDialog = () => {
   console.log("关闭弹窗");

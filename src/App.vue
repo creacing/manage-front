@@ -1,6 +1,5 @@
 <template>
   <div class="my-app">
-    <!-- <Nav /> -->
     <Layout>
       <template #content>
         <router-view v-slot="{ Component }">
@@ -10,12 +9,10 @@
         </router-view>
       </template>
     </Layout>
-    <!-- <Copywright /> -->
   </div>
 </template>
 <script setup>
-// import Nav from "@/components/Nav.vue";
-// import Copywright from "@/components/Copywright.vue";
+
 import Layout from "@/views/Layout.vue";
 </script>
 <style>

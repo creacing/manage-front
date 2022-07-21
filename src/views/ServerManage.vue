@@ -1,5 +1,5 @@
 <template>
-  <div class="baseinfos-cards">
+  <div class="my-baseinfocards">
     <div class="baseinfo mr">
       <div class="card-title">平台</div>
       <div class="card-des">
@@ -29,7 +29,7 @@
     <div id="cpuuseage" class="monitor mr"></div>
     <div id="memoryuseage" class="monitor"></div>
   </div>
-  <div class="disk-use-cards">
+  <div class="server-cards">
     <div id="diskuseage" class="monitor mr"></div>
     <div id="netuseage" class="monitor"></div>
   </div>
@@ -38,10 +38,10 @@
 import { ref, onMounted, onUnmounted } from "vue";
 import VueSocketIO from "vue-3-socket.io";
 import initEcharts from "@/utils/echarts.js";
-import initDiskOption from "@/chartsOptions/diskOption.js";
-import initCpuOption from "@/chartsOptions/cpuOption";
-import initMemoryOption from "@/chartsOptions/memoryOption";
-import initNetOption from "@/chartsOptions/netOption";
+import initDiskOption from "@/chartOption/diskOption.js";
+import initCpuOption from "@/chartOption/cpuOption";
+import initMemoryOption from "@/chartOption/memoryOption";
+import initNetOption from "@/chartOption/netOption";
 const cpuOption = initCpuOption({ initEcharts });
 const memoryOption = initMemoryOption({ initEcharts });
 const diskOption = initDiskOption({ initEcharts });
@@ -59,15 +59,18 @@ onMounted(() => {
   const date = new Date();
   const formatDate = `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
   // const formatDate = `${date.getFullYear()}${(date.getMonth() + 1) < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1}${date.getDate() < 10 ? '0' + date.getDate() : date.getDate()}`
+  //cpu
   cpuOption.xAxis[0].data.push(formatDate);
   myCpuusage = initEcharts("cpuuseage", cpuOption);
+  //memory
   memoryOption.xAxis[0].data.push(formatDate);
   myMemoryuseage = initEcharts("memoryuseage", memoryOption);
-
+  //net
   netOption.xAxis[0].data.push(formatDate);
   myNetuseage = initEcharts("netuseage", netOption);
-
+  //disk
   myDiskuseage = initEcharts("diskuseage", diskOption);
+  //socket
   const socketConfig = {
     connection:
       "http://127.0.0.1:7001/server" +
@@ -88,26 +91,23 @@ onMounted(() => {
       plantForm.value = data.plantForm;
       runTime.value = data.sysUptime;
       nodeVersion.value = data.nodeVersion;
+      //cpu
       cpuUsagePercent.value = data.cpuUsage;
       cpuOption.xAxis[0].data.push(data.date);
       cpuOption.series[0].data.push(data.cpuUsage);
-
       myCpuusage.setOption(cpuOption);
-
+      //memory
       memoryOption.xAxis[0].data.push(data.date);
       memoryOption.series[0].data.push(data.totalMem);
       memoryOption.series[1].data.push(data.freeMem);
-
       myMemoryuseage.setOption(memoryOption);
-
+      //net
       netOption.xAxis[0].data.push(data.date);
       netOption.series[0].data.push(data.netInfo.download);
       netOption.series[1].data.push(data.netInfo.upload);
-
       myNetuseage.setOption(netOption);
-
+      //disk
       const diskInfo = data.diskinfo;
-
       const diskData = [];
       for (const index in diskInfo) {
         const disk = diskInfo[index];
@@ -130,9 +130,7 @@ onMounted(() => {
           ],
         });
       }
-
       diskOption.series[0].data = diskData;
-
       myDiskuseage.setOption(diskOption);
     },
     { $options: { name: "ServerManage" } }
@@ -176,7 +174,7 @@ onUnmounted(() => {
   z-index: 999;
   border-radius: 6px;
 }
-.baseinfos-cards {
+.my-baseinfocards {
   display: flex;
   justify-content: space-between;
 }
@@ -207,27 +205,5 @@ onUnmounted(() => {
 }
 .mr {
   margin-right: 1rem;
-}
-.disk-monitor {
-  width: 50%;
-  height: 100%;
-  background-color: #e9edf2;
-  border-radius: 4px;
-  transition: all 0.3s ease;
-  padding: 25px;
-  box-sizing: border-box;
-}
-.disk-use-cards {
-  width: 100%;
-  height: calc(100% - 300px - 100px - 200px);
-  box-sizing: border-box;
-  display: flex;
-  justify-content: space-between;
-}
-.disk-monitor:hover {
-  transform: translateY(-4px) scale(1.02);
-  box-shadow: 0 14px 24px #0003;
-  z-index: 999;
-  border-radius: 6px;
 }
 </style>

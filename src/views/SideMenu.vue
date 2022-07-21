@@ -7,12 +7,8 @@
         @open="sideMenuOpen"
         @close="sideMenuClose"
       >
-        <el-menu-item
-          v-for="menu in sideMenuList"
-          :key="menu"
-          :index="menu.index"
-          @click="menu.cb"
-          ><el-icon>
+        <el-menu-item v-for="menu in sideMenuList" :key="menu" :index="menu.index" @click="menu.cb">
+          <el-icon>
             <ChatDotRound v-if="menu.index === '0'" />
             <Notebook v-if="menu.index === '1'" />
             <Sugar v-if="menu.index === '2'" />
@@ -23,15 +19,14 @@
             <Magnet v-if="menu.index === '7'" />
             <Files v-if="menu.index === '8'" />
           </el-icon>
-          {{ menu.name }}</el-menu-item
-        >
+          {{ menu.name }}
+        </el-menu-item>
       </el-menu>
     </el-col>
   </el-row>
 </template>
 
 <script lang="ts" setup>
-import { articlesStore } from "./../store/articles.js";
 import { ref, onMounted } from "vue";
 import { useRouter } from "vue-router";
 const router = useRouter();
@@ -104,15 +99,6 @@ const activeIndex = ref("1");
 const handleSelect = (key: string, keyPath: string[]) => {
   // console.log(key, keyPath);
 };
-const store = articlesStore();
-const articlesTitles: string[] = ref(["demo"]);
-
-// articlesTitles.value = articlesStore.articlesTitles
-onMounted(() => {
-  setTimeout(() => {
-    articlesTitles.value = store.articlesTitles;
-  });
-});
 
 const sideMenuOpen = (key: string, keyPath: string[]) => {
   console.log(key, keyPath);

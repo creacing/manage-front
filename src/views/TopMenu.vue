@@ -1,5 +1,5 @@
 <template>
-  <div class="n-top-bar">
+  <div class="my-topbar">
     <el-menu
       :default-active="activeIndex"
       class="el-menu-demo"
@@ -11,11 +11,12 @@
         :index="menu.index"
         @click="menu.cb"
         :key="menu"
-        >{{ menu.name }}</el-menu-item
-      >
+      >{{ menu.name }}</el-menu-item>
     </el-menu>
-    <div class="top-bar-settings">
-      <el-icon><Apple /></el-icon>
+    <div class="topbar-settings">
+      <el-icon>
+        <Apple />
+      </el-icon>
     </div>
   </div>
 </template>
@@ -53,12 +54,12 @@ const handleSelect = (key: string, keyPath: string[]) => {
 };
 </script>
 <style lang="scss" scoped>
-.n-top-bar {
+.my-topbar {
   position: relative;
   display: flex;
   justify-content: center;
 }
-.top-bar-settings {
+.my-topbar-settings {
   position: absolute;
   right: 100px;
   top: 50%;
@@ -74,19 +75,4 @@ const handleSelect = (key: string, keyPath: string[]) => {
     color: rgb(255, 255, 255);
   }
 }
-// .n-top-bar:hover {
-//   transition: all 0.3s ease;
-//   transform: translateY(-4px) scale(0.98);
-//   box-shadow: 0 14px 24px #0003;
-//   z-index: 999;
-//   border-radius: 6px;
-// }
-// :deep(.el-menu-item:hover) {
-//   transition: all 0.3s ease;
-//   transform: translateY(-4px) scale(1.02);
-//   box-shadow: 0 14px 24px #0003;
-//   z-index: 999;
-//   border-radius: 6px;
-//   border: 1px solid #3f9eff;
-// }
 </style>
