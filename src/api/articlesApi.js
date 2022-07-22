@@ -26,4 +26,12 @@ ArticlesApi.downloadArticle = (params) => {
     })
 }
 
+ArticlesApi.uploadArticle = (params) => {
+  return request({
+      url: '/upload_posts',
+      method: 'post',
+      params: params,
+  })
+}
+
 export default ArticlesApi

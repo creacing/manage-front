@@ -1,55 +1,54 @@
 <template>
   <div class="my-article">
     <div class="left-archives">
-      <el-button class="upload-btn mb" @click="Upload"
-        >批量上传<el-icon class="el-icon--right"><Upload /></el-icon
-      ></el-button>
+      <el-button class="upload-btn mb" @click="Upload">批量上传</el-button>
       <Archives @node-click="nodeClick" />
     </div>
     <div class="right-articles">
       <div class="right-buttongroup">
-        <el-button class="create-btn" @click="createArticle"
-          >创建文章</el-button
-        >
-        <el-button class="create-btn" @click="updateArticle"
-          >更新文章</el-button
-        >
+        <el-button class="create-btn" @click="createArticle">创建文章</el-button>
+        <el-button class="create-btn" @click="updateArticle">更新文章</el-button>
 
-        <el-button class="create-btn" @click="downloadArticle"
-          ><a
+        <el-button class="create-btn" @click="downloadArticle">
+          <a
             :href="downloadUrl"
             :download="downloadFileName"
             style="text-decoration: none; color: #999"
-            >下载文章</a
-          ></el-button
-        >
+          >下载文章</a>
+        </el-button>
       </div>
 
       <div class="ac-title mb">
-        <div class="ac-el"><div class="">标题</div></div>
+        <div class="ac-el">
+          <div class>标题</div>
+        </div>
         <el-input v-model="myTitle" placeholder="Please input" class="ml" />
       </div>
       <!-- <div class="ac-group mb"> -->
       <div class="ac-date mb">
-        <div class="ac-el"><div class="">日期</div></div>
+        <div class="ac-el">
+          <div class>日期</div>
+        </div>
         <el-input v-model="myDate" placeholder="Please input" class="ml" />
       </div>
       <div class="ac-tags mb">
-        <div class="ac-el"><div class="">标签</div></div>
+        <div class="ac-el">
+          <div class>标签</div>
+        </div>
         <el-input v-model="myTags" placeholder="Please input" class="ml" />
         <!-- <el-icon><CollectionTag v-if="myTags" /></el-icon>{{ myTags }} -->
       </div>
       <!-- </div> -->
       <div class="ac-description mb">
-        <div class="ac-el"><div class="">描述</div></div>
-        <el-input
-          v-model="myDescription"
-          placeholder="Please input"
-          class="ml"
-        />
+        <div class="ac-el">
+          <div class>描述</div>
+        </div>
+        <el-input v-model="myDescription" placeholder="Please input" class="ml" />
       </div>
       <div class="ac-content">
-        <div class="ac-el"><div class="">内容</div></div>
+        <div class="ac-el">
+          <div class>内容</div>
+        </div>
         <el-input
           v-model="myContent"
           placeholder="Please input"
@@ -67,6 +66,7 @@
 </template>
 <script setup>
 import { ref } from "vue";
+import UploadArticles from '@/components/UploadArticles.vue'
 import ArticlesApi from "@/api/articlesApi.js";
 import Archives from "./Archives.vue";
 import CreateArticle from "./CreateArticle.vue";
@@ -95,17 +95,19 @@ const createArticle = () => {
   dialogVisible.value = true;
 };
 //update
-const updateArticle = () => {};
+const updateArticle = () => { };
 //download
 const downloadArticle = () => {
-  ArticlesApi.downloadArticle();
-  // .then((res) => {
-  //   // window.location.href = "";
-  // });
+  if (myTitle.value === '') return
+
+  ArticlesApi.downloadArticle()
+    .then((res) => {
+      // window.location.href = "";
+    });
 };
 
 //upload
-const Upload = () => {};
+const Upload = () => { };
 //close
 const closeDialog = () => {
   console.log("关闭弹窗");

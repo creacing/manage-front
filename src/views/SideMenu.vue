@@ -2,22 +2,14 @@
   <el-row class="tac">
     <el-col :span="24">
       <el-menu
-        default-active="2"
+        default-active="-1"
         class="el-menu-vertical-demo"
         @open="sideMenuOpen"
         @close="sideMenuClose"
       >
         <el-menu-item v-for="menu in sideMenuList" :key="menu" :index="menu.index" @click="menu.cb">
           <el-icon>
-            <ChatDotRound v-if="menu.index === '0'" />
-            <Notebook v-if="menu.index === '1'" />
-            <Sugar v-if="menu.index === '2'" />
-            <Setting v-if="menu.index === '3'" />
-            <ChatSquare v-if="menu.index === '4'" />
-            <VideoPlay v-if="menu.index === '5'" />
-            <ShoppingBag v-if="menu.index === '6'" />
-            <Magnet v-if="menu.index === '7'" />
-            <Files v-if="menu.index === '8'" />
+            <component :is="menu.icon"></component>
           </el-icon>
           {{ menu.name }}
         </el-menu-item>
@@ -27,74 +19,9 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, onMounted } from "vue";
-import { useRouter } from "vue-router";
-const router = useRouter();
-const sideMenuList = [
-  {
-    name: "加入聊天",
-    index: "0",
-    cb: () => {
-      router.push({ path: "/home" });
-    },
-  },
-  {
-    name: "文章管理",
-    index: "1",
-    cb: () => {
-      router.push({ path: "/articles" });
-    },
-  },
-  {
-    name: "行情关注",
-    index: "2",
-    cb: () => {
-      router.push({ path: "/stocks" });
-    },
-  },
-  {
-    name: "我的设置",
-    index: "3",
-    cb: () => {
-      router.push({ path: "/mySettings" });
-    },
-  },
-  {
-    name: "邮件管理",
-    index: "4",
-    cb: () => {
-      router.push({ path: "/mail" });
-    },
-  },
-  {
-    name: "音乐测试",
-    index: "5",
-    cb: () => {
-      router.push({ path: "/music" });
-    },
-  },
-  {
-    name: "关注商品",
-    index: "6",
-    cb: () => {
-      router.push({ path: "/product" });
-    },
-  },
-  // {
-  //   name: "WIFI信息",
-  //   index: "7",
-  //   cb: () => {
-  //     router.push({ path: "/wifiManage" });
-  //   },
-  // },
-  {
-    name: "文档信息",
-    index: "8",
-    cb: () => {
-      router.push({ path: "/document" });
-    },
-  },
-];
+import { ref } from "vue";
+import sideMenuList from "@/configs/sideMenuList.js";
+
 const activeIndex = ref("1");
 const handleSelect = (key: string, keyPath: string[]) => {
   // console.log(key, keyPath);

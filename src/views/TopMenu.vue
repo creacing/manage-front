@@ -11,47 +11,33 @@
         :index="menu.index"
         @click="menu.cb"
         :key="menu"
-        >{{ menu.name }}</el-menu-item
-      >
+      >{{ menu.name }}</el-menu-item>
     </el-menu>
-    <div class="my-topbarsettings">
+    <div class="my-topbarsettings" @click="openDrawer">
       <el-icon>
-        <Apple />
+        <More />
       </el-icon>
     </div>
   </div>
+
+  <RightDrawer :showDrawer="showDrawer" @changeDrawer="changeDrawer" />
 </template>
 
 <script lang="ts" setup>
+import RightDrawer from "../components/RightDrawer.vue";
 import { ref } from "vue";
-import { useRouter } from "vue-router";
-const router = useRouter();
-const topMenuList = [
-  {
-    name: "MY ADMIN",
-    index: "0",
-    cb: () => {
-      router.push({ path: "/" });
-    },
-  },
-  {
-    name: "系统监控",
-    index: "1",
-    cb: () => {
-      router.push({ path: "/serverManage" });
-    },
-  },
-  {
-    name: "用户管理",
-    index: "2",
-    cb: () => {
-      router.push({ path: "/users" });
-    },
-  },
-];
+import topMenuList from "@/configs/topMenuList.js";
+const showDrawer = ref(false);
+
 const activeIndex = ref("0");
 const handleSelect = (key: string, keyPath: string[]) => {
   // console.log(key, keyPath);
+};
+const openDrawer = () => {
+  showDrawer.value = true;
+};
+const changeDrawer = () => {
+  showDrawer.value = false;
 };
 </script>
 <style lang="scss" scoped>
@@ -65,8 +51,12 @@ const handleSelect = (key: string, keyPath: string[]) => {
   right: 100px;
   top: 50%;
   transform: translateY(-50%);
+  cursor: pointer;
   .el-icon {
     color: #fff;
+  }
+  .el-icon:hover {
+    color: aqua;
   }
 }
 .el-menu-demo {

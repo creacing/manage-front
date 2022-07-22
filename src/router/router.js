@@ -17,13 +17,13 @@ const router = createRouter({
             path: '/login',
             component: MyLogin,
         },
-        // {
-        //   path:'/',
-        //   component:Layout,
-        //   meta: {
-        //     requireAuth: true,  // 添加该字段，表示进入这个路由是需要登录的
-        //   },
-        // },
+        {
+          path:'/',
+          component:About,
+          meta: {
+            requireAuth: true,  // 添加该字段，表示进入这个路由是需要登录的
+          },
+        },
         {
             path: '/home',
             component: MyHome,
@@ -34,13 +34,6 @@ const router = createRouter({
         {
             path: '/users',
             component: Users,
-            meta: {
-                requireAuth: true, // 添加该字段，表示进入这个路由是需要登录的
-            },
-        },
-        {
-            path: '/about',
-            component: About,
             meta: {
                 requireAuth: true, // 添加该字段，表示进入这个路由是需要登录的
             },
