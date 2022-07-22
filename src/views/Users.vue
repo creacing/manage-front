@@ -10,9 +10,11 @@
           :suffix-icon="Search"
         />
       </div>
-      <el-button type="primary"
-        ><el-icon><Refresh /></el-icon
-      ></el-button>
+      <el-button type="primary">
+        <el-icon>
+          <Refresh />
+        </el-icon>
+      </el-button>
       <!-- <el-button type="primary">Primary</el-button> -->
     </div>
     <div class="my-users-table">
@@ -24,25 +26,19 @@
               <span style="margin-left: 10px">{{ scope.row.date }}</span>
             </div>
           </template>
-        </el-table-column> -->
-        <el-table-column
-          :label="column.label"
-          v-for="column in userColumn"
-        >
+        </el-table-column>-->
+        <el-table-column :label="column.label" v-for="column in userColumn">
           <template #default="scope">
-            <el-popover
-              effect="light"
-              trigger="hover"
-              placement="top"
-              width="auto"
-            >
+            <el-popover effect="light" trigger="hover" placement="top" width="auto">
               <template #default>
                 <div>{{ `${column.prop}: ${scope.row[column.prop]}` }}</div>
               </template>
               <template #reference>
-                <el-tag v-if="column.prop === 'name'">{{
+                <el-tag v-if="column.prop === 'name'">
+                  {{
                   scope.row.name
-                }}</el-tag>
+                  }}
+                </el-tag>
                 <span v-else>{{ scope.row[column.prop] }}</span>
               </template>
             </el-popover>
@@ -50,15 +46,12 @@
         </el-table-column>
         <el-table-column label="Operations">
           <template #default="scope">
-            <el-button size="small" @click="handleEdit(scope.$index, scope.row)"
-              >Edit</el-button
-            >
+            <el-button size="small" @click="handleEdit(scope.$index, scope.row)">Edit</el-button>
             <el-button
               size="small"
               type="danger"
               @click="handleDelete(scope.$index, scope.row)"
-              >Delete</el-button
-            >
+            >Delete</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -105,6 +98,7 @@ const userColumn = [
 .my-users {
   height: 100%;
   background-color: #fff;
+  min-width: 1000px;
 }
 .my-users-operations {
   padding: 0.5rem;

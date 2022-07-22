@@ -30,7 +30,7 @@ ArticlesApi.uploadArticle = (params) => {
   return request({
       url: '/upload_posts',
       method: 'post',
-      params: params,
+      data: params,
   })
 }
 

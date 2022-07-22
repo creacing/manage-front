@@ -10,6 +10,7 @@ import ServerManage from '@/views/ServerManage.vue'
 import Stock from '@/views/Stock.vue'
 import Mails from '@/views/Mails.vue'
 import Article from '@/views/Article.vue'
+import Console  from '@/views/Console.vue'
 // import Layout from '@/views/Layout.vue'
 const router = createRouter({
     history: createWebHistory(),
@@ -87,7 +88,14 @@ const router = createRouter({
             meta: {
                 requireAuth: true, // 添加该字段，表示进入这个路由是需要登录的
             },
-        }
+        },
+        {
+          path: '/console',
+          component: Console,
+          meta: {
+              requireAuth: true, // 添加该字段，表示进入这个路由是需要登录的
+          },
+      },
     ]
 })
 

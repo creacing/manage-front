@@ -92,6 +92,14 @@ const getSideMenuList = (router)=>{
       },
       icon: ToiletPaper,
     },
+    {
+      name: "控制中心",
+      index: "9",
+      cb: () => {
+        router.push({ path: "/console" });
+      },
+      icon: ToiletPaper,
+    },
   ];
 
   return sideMenuList
