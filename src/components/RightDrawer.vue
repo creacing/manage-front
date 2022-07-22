@@ -1,5 +1,10 @@
 <template>
-  <el-drawer v-model="showDrawer" direction="rtl" title="设置">
+  <el-drawer
+    v-model="showDrawer"
+    direction="rtl"
+    title="设置"
+    @close="drawerClose"
+  >
     <template #default>
       <RightSettingList />
     </template>
@@ -14,7 +19,7 @@
 
 <script lang="ts" setup>
 import RightSettingList from "./RightSettingList.vue";
-import { ref, toRefs } from "vue";
+import { ref, toRefs, watch } from "vue";
 import { ElMessageBox } from "element-plus";
 const props = defineProps({ showDrawer: Boolean });
 const { showDrawer } = toRefs(props);
@@ -40,4 +45,8 @@ function confirmClick() {
       // catch error
     });
 }
+
+const drawerClose = function () {
+  emit("changeDrawer", false);
+};
 </script>

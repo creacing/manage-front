@@ -6,7 +6,7 @@
     <div class="my-sidemenu" v-show="isLogin">
       <SideMenu />
     </div>
-    <div :class="isLogin ? 'my-content' : 'my-content-isLogin'">
+    <div :class="isLogin ? 'my-content' : 'my-content-isLogin'" id="my-content">
       <slot name="content" />
     </div>
   </div>
@@ -53,6 +53,7 @@ watch(
     position: relative;
   }
   .my-content {
+    min-width: 1200px;
     overflow: auto;
     height: 100%;
     width: calc(100% - 12.5rem);

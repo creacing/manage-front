@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import MyHome from '@/views/MyHome.vue'
-import About from '@/views/About.vue'
+import MyAbout from '@/views/MyAbout.vue'
 import Tags from '@/views/Tags.vue'
 import Archives from '@/views/Archives.vue'
 import Collections from '@/views/Collections.vue'
@@ -10,7 +10,7 @@ import ServerManage from '@/views/ServerManage.vue'
 import Stock from '@/views/Stock.vue'
 import Mails from '@/views/Mails.vue'
 import Article from '@/views/Article.vue'
-import Console  from '@/views/Console.vue'
+import Console from '@/views/Console.vue'
 // import Layout from '@/views/Layout.vue'
 const router = createRouter({
     history: createWebHistory(),
@@ -19,11 +19,11 @@ const router = createRouter({
             component: MyLogin,
         },
         {
-          path:'/',
-          component:About,
-          meta: {
-            requireAuth: true,  // 添加该字段，表示进入这个路由是需要登录的
-          },
+            path: '/',
+            component: MyAbout,
+            meta: {
+                requireAuth: true, // 添加该字段，表示进入这个路由是需要登录的
+            },
         },
         {
             path: '/home',
@@ -90,12 +90,12 @@ const router = createRouter({
             },
         },
         {
-          path: '/console',
-          component: Console,
-          meta: {
-              requireAuth: true, // 添加该字段，表示进入这个路由是需要登录的
-          },
-      },
+            path: '/console',
+            component: Console,
+            meta: {
+                requireAuth: true, // 添加该字段，表示进入这个路由是需要登录的
+            },
+        },
     ]
 })
 

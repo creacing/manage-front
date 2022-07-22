@@ -11,7 +11,8 @@
         :index="menu.index"
         @click="menu.cb"
         :key="menu"
-      >{{ menu.name }}</el-menu-item>
+        >{{ menu.name }}</el-menu-item
+      >
     </el-menu>
     <div class="my-topbarsettings" @click="openDrawer">
       <el-icon>
