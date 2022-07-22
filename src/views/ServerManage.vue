@@ -161,6 +161,7 @@ onUnmounted(() => {
 .monitor {
   height: 300px;
   width: 50%;
+  min-width: 600px;
   justify-content: space-between;
   background-color: #e9edf2;
   border-radius: 4px;
@@ -179,8 +180,9 @@ onUnmounted(() => {
   justify-content: space-between;
 }
 .baseinfo {
-  height: 100px;
+  // height: 100px;
   width: 25%;
+  min-width: 300px;
   justify-content: space-between;
   background-color: #e9edf2;
   border-radius: 4px;

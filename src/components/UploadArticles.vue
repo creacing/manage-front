@@ -1,25 +1,31 @@
 <template>
-  <el-upload
-    v-model:file-list="fileList"
-    class="upload-demo"
-    action="https://run.mocky.io/v3/9d059bf9-4660-45f2-925d-ce80ad6c4d15"
-    multiple
-    :on-preview="handlePreview"
-    :on-remove="handleRemove"
-    :before-remove="beforeRemove"
-    :limit="3"
-    :on-exceed="handleExceed"
-  >
-    <el-button type="primary">Click to upload</el-button>
-    <template #tip>
-      <div class="el-upload__tip">
-        jpg/png files with a size less than 500KB.
-      </div>
+  <el-dialog v-model="uploadDialogVisible" title="上传" width="30%" :before-close="handleClose">
+    <el-upload
+      v-model:file-list="fileList"
+      class="upload-demo"
+      action="https://run.mocky.io/v3/9d059bf9-4660-45f2-925d-ce80ad6c4d15"
+      multiple
+      :on-preview="handlePreview"
+      :on-remove="handleRemove"
+      :before-remove="beforeRemove"
+      :limit="3"
+      :on-exceed="handleExceed"
+    >
+      <el-button type="primary">Click to upload</el-button>
+      <template #tip>
+        <div class="el-upload__tip">jpg/png files with a size less than 500KB.</div>
+      </template>
+    </el-upload>
+    <template #footer>
+      <span class="dialog-footer">
+        <el-button @click="cancel">取消</el-button>
+        <el-button type="primary" @click="confirm">确认</el-button>
+      </span>
     </template>
-  </el-upload>
+  </el-dialog>
 </template>
 <script lang="ts" setup>
-import { ref } from "vue";
+import { ref, toRefs } from "vue";
 import { ElMessage, ElMessageBox } from "element-plus";
 
 import type { UploadProps, UploadUserFile } from "element-plus";
@@ -59,4 +65,29 @@ const beforeRemove: UploadProps["beforeRemove"] = (uploadFile, uploadFiles) => {
     () => false
   );
 };
+const props = defineProps({ uploadDialogVisible: Boolean });
+const { uploadDialogVisible } = toRefs(props);
+const emit = defineEmits(["uploadDialogVisible"]);
+
+const handleClose = (done: () => void) => {
+  ElMessageBox.confirm("Are you sure to close this dialog?")
+    .then(() => {
+      done();
+    })
+    .catch(() => {
+      // catch error
+    });
+};
+const cancel = () => {
+  emit("uploadDialogVisible", false);
+};
+const confirm = () => {
+  emit("uploadDialogVisible", false);
+};
 </script>
+
+<style scoped>
+.dialog-footer button:first-child {
+  margin-right: 10px;
+}
+</style>

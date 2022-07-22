@@ -26,9 +26,11 @@
 <script lang="ts" setup>
 import RightDrawer from "../components/RightDrawer.vue";
 import { ref } from "vue";
-import topMenuList from "@/configs/topMenuList.js";
+import { useRouter } from "vue-router";
+const router = useRouter();
+import getTopMenuList from "@/configs/topMenuList.js";
 const showDrawer = ref(false);
-
+const topMenuList = getTopMenuList(router);
 const activeIndex = ref("0");
 const handleSelect = (key: string, keyPath: string[]) => {
   // console.log(key, keyPath);

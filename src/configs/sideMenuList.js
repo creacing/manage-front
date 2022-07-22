@@ -10,89 +10,92 @@ import {
   Files,
   ToiletPaper,
 } from "@element-plus/icons-vue";
-import { useRouter } from "vue-router";
-const router = useRouter();
-const sideMenuList = [
-  {
-    name: "加入聊天",
-    index: "0",
-    cb: () => {
-      router.push({ path: "/home" });
+const getSideMenuList = (router)=>{
+  const sideMenuList = [
+    {
+      name: "加入聊天",
+      index: "0",
+      cb: () => {
+        router.push({ path: "/home" });
+      },
+      icon: ChatDotRound,
     },
-    icon: ChatDotRound,
-  },
-  {
-    name: "文章管理",
-    index: "1",
-    cb: () => {
-      router.push({ path: "/articles" });
+    {
+      name: "文章管理",
+      index: "1",
+      cb: () => {
+        router.push({ path: "/articles" });
+      },
+      icon: Notebook,
     },
-    icon: Notebook,
-  },
-  {
-    name: "行情关注",
-    index: "2",
-    cb: () => {
-      router.push({ path: "/stocks" });
+    {
+      name: "行情关注",
+      index: "2",
+      cb: () => {
+        router.push({ path: "/stocks" });
+      },
+      icon: Sugar,
     },
-    icon: Sugar,
-  },
-  {
-    name: "我的设置",
-    index: "3",
-    cb: () => {
-      router.push({ path: "/mySettings" });
+    {
+      name: "我的设置",
+      index: "3",
+      cb: () => {
+        router.push({ path: "/mySettings" });
+      },
+      icon: Setting,
     },
-    icon: Setting,
-  },
-  {
-    name: "邮件管理",
-    index: "4",
-    cb: () => {
-      router.push({ path: "/mail" });
+    {
+      name: "邮件管理",
+      index: "4",
+      cb: () => {
+        router.push({ path: "/mail" });
+      },
+      icon: ChatSquare,
     },
-    icon: ChatSquare,
-  },
-  {
-    name: "音乐测试",
-    index: "5",
-    cb: () => {
-      router.push({ path: "/music" });
+    {
+      name: "音乐测试",
+      index: "5",
+      cb: () => {
+        router.push({ path: "/music" });
+      },
+      icon: VideoPlay,
     },
-    icon: VideoPlay,
-  },
-  {
-    name: "关注商品",
-    index: "6",
-    cb: () => {
-      router.push({ path: "/product" });
+    {
+      name: "关注商品",
+      index: "6",
+      cb: () => {
+        router.push({ path: "/product" });
+      },
+      icon: ShoppingBag,
     },
-    icon: ShoppingBag,
-  },
-  // {
-  //   name: "WIFI信息",
-  //   index: "7",
-  //   cb: () => {
-  //     router.push({ path: "/wifiManage" });
-  //   },
-  //   icon: Magnet
-  // },
-  {
-    name: "文档信息",
-    index: "8",
-    cb: () => {
-      router.push({ path: "/document" });
+    // {
+    //   name: "WIFI信息",
+    //   index: "7",
+    //   cb: () => {
+    //     router.push({ path: "/wifiManage" });
+    //   },
+    //   icon: Magnet
+    // },
+    {
+      name: "文档信息",
+      index: "8",
+      cb: () => {
+        router.push({ path: "/document" });
+      },
+      icon: Files,
     },
-    icon: Files,
-  },
-  {
-    name: "番剧信息",
-    index: "8",
-    cb: () => {
-      router.push({ path: "/amination" });
+    {
+      name: "番剧信息",
+      index: "8",
+      cb: () => {
+        router.push({ path: "/amination" });
+      },
+      icon: ToiletPaper,
     },
-    icon: ToiletPaper,
-  },
-];
+  ];
 
-export default sideMenuList
+  return sideMenuList
+}
+
+
+export default getSideMenuList

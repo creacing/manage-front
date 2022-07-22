@@ -1,4 +1,6 @@
 <template>
+  <UploadArticles :uploadDialogVisible="uploadDialogVisible" />
+
   <div class="my-article">
     <div class="left-archives">
       <el-button class="upload-btn mb" @click="Upload">批量上传</el-button>
@@ -107,7 +109,10 @@ const downloadArticle = () => {
 };
 
 //upload
-const Upload = () => { };
+const uploadDialogVisible = ref(false)
+const Upload = () => {
+  uploadDialogVisible.value = true
+};
 //close
 const closeDialog = () => {
   console.log("关闭弹窗");

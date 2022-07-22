@@ -20,8 +20,11 @@
 
 <script lang="ts" setup>
 import { ref } from "vue";
-import sideMenuList from "@/configs/sideMenuList.js";
+import { useRouter } from "vue-router";
+const router = useRouter();
+import getSideMenuList from "@/configs/sideMenuList.js";
 
+const sideMenuList = getSideMenuList(router);
 const activeIndex = ref("1");
 const handleSelect = (key: string, keyPath: string[]) => {
   // console.log(key, keyPath);
