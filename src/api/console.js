@@ -4,7 +4,7 @@ const ConsoleApi = {};
 
 ConsoleApi.sendCommend = (params) => {
     return request({
-        url: "/console",
+        url: "/get_console",
         method: "post",
         data: params,
     });
