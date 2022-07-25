@@ -4,7 +4,7 @@
   <div class="my-article">
     <div class="left-archives">
       <el-button class="upload-btn mb" @click="Upload">批量上传</el-button>
-      <Archives @node-click="nodeClick" />
+      <MyArchives @node-click="nodeClick" />
     </div>
     <div class="right-articles">
       <div class="right-buttongroup">
@@ -59,7 +59,6 @@
           rows="30"
           class="ml"
         />
-        <!-- <div v-html="myContent"></div> -->
       </div>
     </div>
   </div>
@@ -70,7 +69,7 @@
 import { ref } from "vue";
 import UploadArticles from '@/components/UploadArticles.vue'
 import ArticlesApi from "@/api/articlesApi.js";
-import Archives from "./Archives.vue";
+import MyArchives from "./MyArchives.vue";
 import CreateArticle from "./CreateArticle.vue";
 const downloadUrl = ref("http://127.0.0.1:7001/download_posts");
 const downloadFileName = ref("posts.xls");

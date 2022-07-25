@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import MyHome from '@/views/MyHome.vue'
 import MyAbout from '@/views/MyAbout.vue'
 import Tags from '@/views/Tags.vue'
-import Archives from '@/views/Archives.vue'
+import MyArchives from '@/views/MyArchives.vue'
 import Collections from '@/views/Collections.vue'
 import MyLogin from '@/views/MyLogin.vue'
 import Users from '@/views/Users.vue'
@@ -48,7 +48,7 @@ const router = createRouter({
         },
         {
             path: '/archives',
-            component: Archives,
+            component: MyArchives,
             meta: {
                 requireAuth: true, // 添加该字段，表示进入这个路由是需要登录的
             },
@@ -65,6 +65,7 @@ const router = createRouter({
             component: ServerManage,
             meta: {
                 requireAuth: true, // 添加该字段，表示进入这个路由是需要登录的
+                keepAlive: true // 是否缓存页面
             },
         },
         {
