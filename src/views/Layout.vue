@@ -1,10 +1,10 @@
 <template>
   <div v-show="isLogin">
-    <TopMenu />
+    <MyTopMenu />
   </div>
   <div :class="isLogin ? 'my-body' : 'my-body-login'">
     <div class="my-sidemenu" v-show="isLogin">
-      <SideMenu />
+      <MySideMenu />
     </div>
     <div :class="isLogin ? 'my-content' : 'my-content-isLogin'" id="my-content">
       <slot name="content" />
@@ -12,8 +12,8 @@
   </div>
 </template>
 <script setup>
-import TopMenu from "@/views/TopMenu.vue";
-import SideMenu from "@/views/SideMenu.vue";
+import MyTopMenu from "@/views/MyTopMenu.vue";
+import MySideMenu from "@/views/MySideMenu.vue";
 import { ref, watch } from "vue";
 import { useRouter } from "vue-router";
 const router = useRouter();

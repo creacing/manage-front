@@ -29,7 +29,7 @@ const getConsoleResult = () => {
     commend: input.value
   }
   ConsoleApi.sendCommend(param).then(res => {
-
+    console.log('res', res);
   })
 }
 </script>

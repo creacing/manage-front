@@ -48,7 +48,8 @@ Server.interceptors.response.use(
         return res.data;
     },
     (error) => {
-        const responseCode = error.response.status;
+      console.log('error',error);
+        const responseCode = error?.response?.status;
         switch (responseCode) {
             case 400:
                 ElMessage.error("请求错误(400)");

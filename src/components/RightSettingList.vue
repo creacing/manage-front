@@ -22,7 +22,7 @@ const setList = [
   {
     name: "外观",
     cb: () => {
-      console.log("改变外观");
+      // console.log("改变外观");
       const myContent = document.getElementById("my-content");
       bgColorFlag = !bgColorFlag;
       myContent.style.backgroundColor = bgColorFlag

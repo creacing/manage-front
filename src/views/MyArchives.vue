@@ -12,19 +12,13 @@
   />
 </template>
 
-<script lang="ts" setup>
+<script setup>
 import { ref, watch, onBeforeMount } from "vue";
 import { ElTree } from "element-plus";
 import ArticlesApi from "@/api/articlesApi.js";
 
-interface Tree {
-  id: number;
-  label: string;
-  children?: Tree[];
-}
-
 const filterText = ref("");
-const treeRef = ref<InstanceType<typeof ElTree>>();
+const treeRef = ref();
 
 const defaultProps = {
   children: "children",
@@ -32,15 +26,15 @@ const defaultProps = {
 };
 
 watch(filterText, (val) => {
-  treeRef.value!.filter(val);
+  treeRef.value.filter(val);
 });
 
-const filterNode = (value: string, data: Tree) => {
+const filterNode = (value, data) => {
   if (!value) return true;
   return data.label.includes(value);
 };
 
-const dataTree: Tree[] = ref([]);
+const dataTree = ref([]);
 
 onBeforeMount(() => {
   ArticlesApi.queryAllArticles().then((res) => {

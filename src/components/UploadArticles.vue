@@ -1,5 +1,10 @@
 <template>
-  <el-dialog v-model="uploadDialogVisible" title="上传" width="30%" :before-close="handleClose">
+  <el-dialog
+    v-model="uploadDialogVisible"
+    title="上传"
+    width="30%"
+    :before-close="handleClose"
+  >
     <el-upload
       v-model:file-list="fileList"
       class="upload-demo"
@@ -13,7 +18,9 @@
     >
       <el-button type="primary">Click to upload</el-button>
       <template #tip>
-        <div class="el-upload__tip">jpg/png files with a size less than 500KB.</div>
+        <div class="el-upload__tip">
+          jpg/png files with a size less than 500KB.
+        </div>
       </template>
     </el-upload>
     <template #footer>

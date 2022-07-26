@@ -7,7 +7,12 @@
         @open="sideMenuOpen"
         @close="sideMenuClose"
       >
-        <el-menu-item v-for="menu in sideMenuList" :key="menu" :index="menu.index" @click="menu.cb">
+        <el-menu-item
+          v-for="menu in sideMenuList"
+          :key="menu"
+          :index="menu.index"
+          @click="menu.cb"
+        >
           <el-icon>
             <component :is="menu.icon"></component>
           </el-icon>
@@ -18,30 +23,32 @@
   </el-row>
 </template>
 
-<script lang="ts" setup>
+<script setup>
 import { ref } from "vue";
 import { useRouter } from "vue-router";
 const router = useRouter();
-import getSideMenuList from "@/configs/sideMenuList.js";
 
+import getSideMenuList from "@/configs/sideMenuList.js";
 const sideMenuList = getSideMenuList(router);
+
 const activeIndex = ref("1");
-const handleSelect = (key: string, keyPath: string[]) => {
+const handleSelect = (key, keyPath) => {
   // console.log(key, keyPath);
 };
 
-const sideMenuOpen = (key: string, keyPath: string[]) => {
+const sideMenuOpen = (key, keyPath) => {
   console.log(key, keyPath);
 };
-const sideMenuClose = (key: string, keyPath: string[]) => {
+const sideMenuClose = (key, keyPath) => {
   console.log(key, keyPath);
 };
 </script>
+
 <style lang="scss" scoped>
 .tac {
   transition: all 0.3s ease;
   height: 100%;
-  // width: 200px;
+  width: 200px;
   .el-menu {
     height: 100%;
   }
@@ -56,7 +63,6 @@ const sideMenuClose = (key: string, keyPath: string[]) => {
   transition: all 0.3s ease;
 }
 :deep(.el-menu-item:hover) {
-  transition: all 0.3s ease;
   transform: translateY(-4px) scale(1.02);
   box-shadow: 0 14px 24px #0003;
   z-index: 999;
