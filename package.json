@@ -19,6 +19,8 @@
     "sass-loader": "^13.0.0",
     "socket.io": "^4.5.1",
     "socket.io-client": "^4.5.1",
+    "sockjs-client": "^1.6.1",
+    "stompjs": "^2.3.3",
     "vue": "^3.2.25",
     "vue-3-socket.io": "^1.0.5",
     "vue-router": "4",

@@ -1,17 +1,16 @@
 <template>
   <div class="my-console">
-    <el-input v-model="input" placeholder="Please input" />
-    <el-button type="primary" @click="getConsoleResult">
-      <el-icon>
-        <Refresh />
-      </el-icon>
-    </el-button>
+    <div style="display: flex">
+      <el-input v-model="input" placeholder="Please input" />
+      <el-button type="primary" @click="getConsoleResult">
+        <el-icon>
+          <Refresh />
+        </el-icon>
+      </el-button>
+    </div>
+
     <div class="my-logs">
-      <div class="my-log">xxx</div>
-      <div class="my-log">xxx</div>
-      <div class="my-log">xxx</div>
-      <div class="my-log">xxx</div>
-      <div class="my-log">xxx</div>
+      <div class="my-log" v-for="log in logs" :key="log">{{log}}</div>
     </div>
   </div>
 </template>
@@ -20,7 +19,7 @@
 import ConsoleApi from '@/api/console.js'
 import { ref } from "vue";
 const input = ref("");
-
+const logs = ref([])
 const getConsoleResult = () => {
   if (input.value === '') {
     return
@@ -30,6 +29,7 @@ const getConsoleResult = () => {
   }
   ConsoleApi.sendCommend(param).then(res => {
     console.log('res', res);
+    logs.value = res.data.split('\r\n')
   })
 }
 </script>

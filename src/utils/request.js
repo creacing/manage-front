@@ -6,7 +6,7 @@ import { ElMessage } from "element-plus";
 const Server = axios.create({
     baseURL: "http://127.0.0.1:7001",
     // baseURL: '/api',
-    timeout: 8000,
+    timeout: 20000,
 });
 //定义前置拦截 请求发出去前触发
 Server.interceptors.request.use(
