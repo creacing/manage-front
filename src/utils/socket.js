@@ -2,6 +2,7 @@ import SockJS from 'sockjs-client' // socket
 import Stomp from 'stompjs'
 
 class SocketMessage {
+  
   constructor() {
     this.wsUrl = '127.0.0.1:7001' // websocket url地址
     this.stompClient = null // socket 服务
