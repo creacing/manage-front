@@ -5,24 +5,19 @@
 
       <!-- <el-button class="create-btns" @click="createNewRoom" type="primary"
         >创建一个房间</el-button
-      > -->
+      >-->
       <!-- <div class="search-btns"></div> -->
     </div>
-    <div><span>聊天室 - room name</span></div>
+    <div>
+      <span>聊天室 - room name</span>
+    </div>
     <div class="messages">
-      <el-descriptions
-        title=""
-        :column="1"
-        :size="size"
-        direction="vertical"
-        :style="blockMargin"
-      >
+      <el-descriptions title :column="1" :size="size" direction="vertical" :style="blockMargin">
         <el-descriptions-item
           v-for="info in infoList"
           :key="info"
           :label="info.username"
-          >{{ `${info.date}   ${info.text}` }}
-        </el-descriptions-item>
+        >{{ `${info.date} ${info.text}` }}</el-descriptions-item>
       </el-descriptions>
     </div>
     <div class="send-message">
@@ -41,6 +36,8 @@ import { onMounted, ref, computed, nextTick } from "vue";
 import VueSocketIO from "vue-3-socket.io";
 import ChatApi from "@/api/chatApi.js";
 import { ElMessage } from "element-plus";
+import { useRouter } from "vue-router";
+const router = useRouter();
 import ChatRoomNameDialog from "@/components/ChatRoomNameDialog.vue";
 const message = ref("");
 const infoList = ref([]);
@@ -108,7 +105,7 @@ ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()} message:`,
   });
 };
 
-const createNewRoom = () => {};
+const createNewRoom = () => { };
 
 const confirmNewRoom = async () => {
   const roomInfo = {};
